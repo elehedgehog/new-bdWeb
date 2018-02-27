@@ -1,0 +1,35 @@
+<main class="driver-manage">
+  <header>
+    采集驱动
+    <a>
+      <span (click)="uploadDriver()">上传</span>
+    </a>
+  </header>
+  <ul class="table-wrapper">
+    <li>
+      <span>驱动名称</span>
+      <span>主版本</span>
+      <span>此版本</span>
+      <span>中文名称</span>
+      <span>作者</span>
+      <span>描述</span>
+      <span>操作</span>
+    </li>
+    <li *ngFor="let item of driverData">
+      <span>{{item.egName}}</span>
+      <span>{{item.version}}</span>
+      <span>{{item.minVersion}}</span>
+      <span>{{item.cnName}}</span>
+      <span>{{item.author}}</span>
+      <span>{{item.description}}</span>
+      <span>编辑</span>
+    </li>
+  </ul>
+  <div class="paginator-wrapper">
+    <mat-paginator [length]="driverDataHolder.length"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="pageChange($event)">
+    </mat-paginator>
+  </div>
+</main>

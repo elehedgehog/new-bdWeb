@@ -1,0 +1,133 @@
+@import "../../theme.scss";
+.collection-record {
+  width: 1320px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.reload-btn {
+  font-size: 14px;
+  color: $hoverColor;
+  cursor: pointer;
+  position: absolute;
+  left: 100px;
+  top: 22px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.description {
+  height: 60px;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 60px;
+}
+
+.task-table-container {
+  width: 100%;
+  border-left: solid 1px #dbe0e2;
+  border-right: solid 1px #dbe0e2;
+  margin-top: 20px;
+}
+
+.table-header-wrapper {
+  height: 40px;
+  box-sizing: border-box;
+  border: solid 1px #dbe0e2;
+  border-left: none;
+  border-right: none;
+  display: flex;
+  align-items: center;
+  .table-header-item {
+    font-size: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1c1c11;
+  }
+}
+
+.table-header-item,
+.table-body-item {
+  &:nth-child(1) {
+    width: 160px;
+  }
+  &:nth-child(2) {
+    width: 180px;
+  }
+  &:nth-child(3) {
+    width: 110px;
+  }
+  &:nth-child(4) {
+    width: 180px;
+  }
+  &:nth-child(5) {
+    width: 160px;
+  }
+  &:nth-child(6) {
+    width: 320px;
+  }
+  &:nth-child(7) {
+    width: 210px - 35px;
+  }
+  &:nth-child(9) {
+    width: 35px;
+  }
+}
+
+.table-body-wrapper {
+  min-height: 60px;
+  width: 100%;
+  font-size: 14px;
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: solid 1px #dbe0e2;
+  &:hover {
+    box-shadow: 0 0 16px #d0d7e3;
+  }
+}
+
+.table-body-item {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  font-size: 12px;
+  max-height: 110px;
+  color: #575757;
+  min-width: 40px;
+  &.underline-text {
+    color: $hoverColor;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  &.static {
+    flex-direction: column;
+    align-content: center;
+    strong {
+      font-weight: normal;
+      color: #eb414f;
+    }
+  }
+  &.operate {
+    em {
+      width: 16px;
+      height: 10px;
+      cursor: pointer;
+      background-image: url(/assets/img/processing_dropdown.png);
+      background-repeat: no-repeat;
+      background-position: 0 0;
+    }
+  }
+}
+
+.table-expander {
+  margin-left: 30px;
+  transition: transform .2s ease-out;
+  &.expanded {
+    transform: rotateZ(180deg);
+  }
+}

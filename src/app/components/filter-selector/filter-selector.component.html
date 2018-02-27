@@ -1,0 +1,164 @@
+<section class="filter-container">
+  <div class="cf filter-item-wrapper"
+       [class.filter-item-expanded]="serverExpanded">
+    <header>服务器:</header>
+    <ul>
+      <li class="filter-item"
+          (click)="toggleServerFilter(null, true)">全部</li>
+      <li class="filter-item"
+          *ngFor="let item of allInfoData.servers"
+          [class.filter-selected]="serverFilter.includes(item.csid)"
+          (click)="toggleServerFilter(item)">{{item.csid}}</li>
+    </ul>
+    <a class="cf expander"
+       (click)="serverExpanded = !serverExpanded">
+      <span>展开</span>
+      <em [class.expanded]="serverExpanded"></em>
+    </a>
+  </div>
+  <div class="cf filter-item-wrapper"
+       [class.filter-item-expanded]="driverExpanded"
+       *ngIf="isExpanded">
+    <header>采集驱动:</header>
+    <ul>
+      <li class="filter-item"
+          (click)="toggleDriverFilter(null, true)">全部</li>
+      <li class="filter-item"
+          *ngFor="let item of driverRender"
+          [class.filter-selected]="driverFilter.includes(item.caid)"
+          (click)="toggleDriverFilter(item)">{{item.egName}}</li>
+    </ul>
+    <a class="cf expander"
+       (click)="driverExpanded = !driverExpanded">
+      <span>展开</span>
+      <em [class.expanded]="driverExpanded"></em>
+    </a>
+  </div>
+  <div class="cf filter-item-wrapper"
+       [class.filter-item-expanded]="taskExpanded"
+       *ngIf="isExpanded">
+    <header>采集任务:</header>
+    <ul>
+      <li class="filter-item"
+          (click)="toggleTaskFilter(null, true)">全部</li>
+      <li class="filter-item"
+          *ngFor="let item of taskRender"
+          [class.filter-selected]="taskFilter.includes(item.ctid)"
+          (click)="toggleTaskFilter(item)">{{item.name}}</li>
+    </ul>
+    <a class="cf expander"
+       (click)="taskExpanded = !taskExpanded">
+      <span>展开</span>
+      <em [class.expanded]="taskExpanded"></em>
+    </a>
+  </div>
+  <div class="cf filter-item-wrapper"
+       [class.filter-item-expanded]="labelExpanded"
+       *ngIf="isExpanded">
+    <header>标签:</header>
+    <ul>
+      <li class="filter-item"
+          (click)="toggleLabelFilter(null, true)">全部</li>
+      <li class="filter-item"
+          *ngFor="let item of labelRender"
+          [class.filter-selected]="labelFilter.includes(item)"
+          (click)="toggleLabelFilter(item)">{{item}}</li>
+    </ul>
+    <a class="cf expander"
+       (click)="labelExpanded = !labelExpanded">
+      <span>展开</span>
+      <em [class.expanded]="labelExpanded"></em>
+    </a>
+  </div>
+  <div class="cf filter-item-wrapper"
+       [class.filter-item-expanded]="labelExpanded"
+       *ngIf="isExpanded">
+    <header>服务器状态:</header>
+    <ul>
+      <li class="filter-item"
+          [class.filter-selected]="statusFilter.includes('正常')"
+          (click)="toggleStatus('正常')">正常</li>
+      <li class="filter-item"
+          [class.filter-selected]="statusFilter.includes('暂停')"
+          (click)="toggleStatus('暂停')">暂停</li>
+      <li class="filter-item"
+          [class.filter-selected]="statusFilter.includes('结束')"
+          (click)="toggleStatus('结束')">结束</li>
+      <li class="filter-item"
+          [class.filter-selected]="statusFilter.includes('异常')"
+          (click)="toggleStatus('异常')">异常</li>
+    </ul>
+  </div>
+  <div class="filter-item-wrapper filter-date-wrapper"
+       style="overflow: visible"
+       *ngIf="isExpanded">
+    <header>最后执行时间:</header>
+    <owl-date-time class="datetime-picker"
+                   [(ngModel)]="lastExecuteTimeStart"
+                   [styleClass]="'filter-selector-datetime-wrapper'"
+                   [locale]="zh">
+    </owl-date-time>
+    <span style="margin:0 4px">-</span>
+    <owl-date-time class="datetime-picker"
+                   [styleClass]="'filter-selector-datetime-wrapper'"
+                   [locale]="zh"
+                   [(ngModel)]="lastExecuteTimeEnd">
+    </owl-date-time>
+    <button class="filter-btn"
+            (click)="toggleLastExecutedTime(true)"
+            style="align-self: center">确定</button>
+  </div>
+  <div class="filter-item-wrapper cf">
+    <header>已选条件:</header>
+    <ul style="width: auto; float: left; height: 100%;">
+      <li class="cf filter-selected-wrapper"
+          *ngIf="serverFilter.length > 0">
+        <a>服务器:
+          <strong>{{serverDesHolder.join('、')}}</strong>
+        </a>
+        <span (click)="toggleServerFilter(null, false)"></span>
+      </li>
+      <li class="cf filter-selected-wrapper"
+          *ngIf="driverFilter.length > 0">
+        <a>采集驱动:
+          <strong>{{driverDesHolder.join('、')}}</strong>
+        </a>
+        <span (click)="toggleDriverFilter(null, false)"></span>
+      </li>
+      <li class="cf filter-selected-wrapper"
+          *ngIf="taskFilter.length > 0">
+        <a>采集任务:
+          <strong>{{taskDesHolder.join('、')}}</strong>
+        </a>
+        <span (click)="toggleTaskFilter(null, false)"></span>
+      </li>
+      <li class="cf filter-selected-wrapper"
+          *ngIf="labelFilter.length > 0">
+        <a>标签:
+          <strong>{{labelFilter.join('、')}}</strong>
+        </a>
+        <span (click)="toggleLabelFilter(null, false)"></span>
+      </li>
+      <li class="cf filter-selected-wrapper"
+          *ngIf="statusFilter.length > 0">
+        <a>服务器状态:
+          <strong>{{statusFilter.join('、')}}</strong>
+        </a>
+        <span (click)="toggleStatus(null, false)"></span>
+      </li>
+      <li class="cf filter-selected-wrapper"
+          *ngIf="lastExecutedTime">
+        <a>最后执行时间:
+          <strong style="max-width: 220px">{{lastExecutedTime}}</strong>
+        </a>
+        <span (click)="toggleLastExecutedTime(false)"></span>
+      </li>
+    </ul>
+    <span class="clear-filter-btn"
+          (click)="clearAllFilter()">清空筛选</span>
+  </div>
+  <main class="filter-toggle-wrapper">
+    <button class="filter-panel-toggler"
+            (click)="isExpanded = !isExpanded">展开</button>
+  </main>
+</section>

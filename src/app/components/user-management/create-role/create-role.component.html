@@ -1,0 +1,16 @@
+<main class="create-role">
+  <header class="header">
+    <h1>新增角色</h1>
+    <span (click)="close()"></span>
+  </header>
+  <ul class="input-item-wrapper">
+    <li>
+      <span>角色名</span>
+      <input [(ngModel)]="name"
+             type="text">
+    </li>
+  </ul>
+  <div class="btn-wrapper">
+    <span (click)="submit()">确定</span>
+  </div>
+</main>

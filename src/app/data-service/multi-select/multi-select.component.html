@@ -1,0 +1,28 @@
+<main class="multi-select">
+  <div class="text-container">
+    asdasdasdasdsa
+  </div>
+  <div class="option-wrapper">
+    <section class="input-wrapper"
+             (click)="isPopupShow = true">
+      <span></span>
+      <em></em>
+    </section>
+    <section class="popup-wrapper"
+             *ngIf="isPopupShow"
+             (mouseleave)="closePopup($event)">
+      <ul class="select-wrapper">
+        <li class="header">
+          <em [class.active]="isSelectAll"
+              (click)="selectOption(null, true)"></em>
+          <span>全选</span>
+        </li>
+        <li *ngFor="let item of selectData"
+            (click)="selectOption(item, null)">
+          <em [class.active]="item.selected"></em>
+          <span>{{item.viewValue}}</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+</main>

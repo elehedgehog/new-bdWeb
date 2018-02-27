@@ -1,0 +1,119 @@
+@import "../../../theme.scss";
+.user-audict {
+  // width: 512px - 40px;
+  background-color: whitel;
+  box-sizing: - border-box;
+  background-color: white;
+  >header {
+    width: 100%;
+    font-size: 18px;
+    height: 18px;
+    line-height: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    span {
+      font-size: 16px;
+      color: #989898;
+      cursor: pointer;
+      margin-right: 40px;
+      &:hover,
+      &.active {
+        color: $hoverColorDarker;
+        font-weight: bold;
+      }
+    }
+    em {
+      position: absolute;
+      bottom: -5px;
+      width: 20px;
+      height: 2px;
+      display: block;
+      background-color: $hoverColorDarker;
+      left: 0;
+      transition: transform .2s ease-out;
+      &.waiting {
+        transform: translateX(88px);
+      }
+      &.unpassed {
+        transform: translateX(88px * 2);
+      }
+    }
+  }
+}
+
+.table-wrapper {
+  display: flex;
+  width: 1030px;
+  flex-wrap: wrap;
+  li {
+    display: flex;
+    border-bottom: solid 1px #d2d4db;
+    font-size: 14px;
+    color: #1c1c1c;
+    &:first-of-type {
+      border-top: solid 1px #d2d4db;
+    }
+    >span {
+      text-align: center;
+      border-left: solid 1px #d2d4db;
+      height: 40px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      line-height: 39px;
+      &:last-of-type {
+        border-right: solid 1px #d2d4db;
+      }
+      &:nth-child(1) {
+        width: 175px;
+      }
+      &:nth-child(2) {
+        width: 178px;
+      }
+      &:nth-child(3) {
+        width: 335px;
+      }
+      &:nth-child(4) {
+        width: 178px;
+      }
+      &:nth-child(5) {
+        width: 168px;
+      }
+    }
+    &:not(.header) {
+      span:nth-child(4) {
+        border-right: none;
+      }
+    }
+    a {
+      width: 168px;
+      display: flex;
+      align-content: center;
+      line-height: 39px;
+      box-sizing: border-box;
+      border-right: solid 1px #d2d4db;
+      border-left: solid 1px #d2d4db;
+      justify-content: space-between;
+      padding: 0 38px;
+      span {
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      span:first-of-type {
+        color: $hoverColor;
+      }
+      span:last-of-type {
+        color: #eb414f;
+      }
+    }
+  }
+}
+
+.paginator-wrapper {
+  width: 100%;
+  padding: 0;
+}

@@ -1,0 +1,81 @@
+<main class="role-manage">
+  <header>
+    用户管理
+    <a>
+      <span (click)="createUser()">新增用户</span>
+      <span (click)="deleteUser()">删除</span>
+    </a>
+  </header>
+  <section class="table-wrapper">
+    <ul class="role-list">
+      <li class="header">
+        <div>
+          <span>
+            <em [class.active]="userSelectAll"
+                (click)="selectUser(null, true)"></em>
+          </span>
+          <span>#</span>
+          <span>用户名</span>
+        </div>
+      </li>
+      <li class="item"
+          *ngFor="let item of userData; let i = index">
+        <div [class.active]="item.active"
+             (click)="activeUser(item)">
+          <span>
+            <em (click)="selectUser(item)"
+                [class.active]="item.selected"></em>
+          </span>
+          <span>{{i + 1}}</span>
+          <span>{{item.username}}</span>
+        </div>
+      </li>
+    </ul>
+    <div class="power-detail"
+         *ngIf="activeUserData">
+      <section class="user-info">
+        <header>
+          <span>基础信息</span>
+          <a>
+            <span (click)="editUser()">编辑</span>
+            <em></em>
+          </a>
+        </header>
+        <ul>
+          <li>
+            <span>用户名</span>
+            <span>{{activeUserData.username}}</span>
+          </li>
+          <li>
+            <span>密码</span>
+            <span>{{activeUserData.password}}</span>
+          </li>
+          <li>
+            <span>联系方式</span>
+            <span>{{activeUserData.phone}}</span>
+          </li>
+        </ul>
+      </section>
+      <section class="user-info"
+               style="margin-top: 30px">
+        <header>
+          <span>服务器配置信息</span>
+          <a>
+            <span (click)="editUser()">编辑</span>
+            <em></em>
+          </a>
+        </header>
+        <ul>
+          <li>
+            <span>服务器</span>
+            <span>角色名</span>
+          </li>
+          <li *ngFor="let item of userServerRoleData">
+            <span>{{item.csid}}</span>
+            <span>{{item.name}}</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </section>
+</main>

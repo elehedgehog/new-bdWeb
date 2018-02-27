@@ -1,0 +1,40 @@
+@import '../../theme.scss';
+.collecting-edit-dialog {
+  width: 364px;
+  background-color: whitel;
+  box-sizing: border-box;
+  .owl-datetime-input {
+    height: 34px !important;
+  }
+  background-color: white;
+}
+
+.header {
+  width: 100%;
+  background-color: white;
+  position: relative;
+  margin: 0 0 20px 0;
+  h1 {
+    font-size: 16px;
+    margin: 0;
+    height: 16px;
+    color: #1c1c1c;
+    line-height: 16px;
+  }
+  span {
+    width: 17px;
+    display: block;
+    height: 18px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-image: url(/assets/img/processing_close.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+    &:hover {
+      background-position-x: -16px;
+    }
+  }
+}
+

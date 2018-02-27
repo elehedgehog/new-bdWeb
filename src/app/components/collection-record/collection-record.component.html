@@ -1,0 +1,64 @@
+<app-head-navigation></app-head-navigation>
+<main class="collection-record">
+  <header class="description">采集记录</header>
+  <span class="reload-btn">刷新</span>
+
+  <app-filter-selector (filterChange)="filterChange($event)"
+                       [isHistory]="true"></app-filter-selector>
+
+  <section class="task-table-container">
+    <ul class="table-header-wrapper">
+      <li class="table-header-item">服务器</li>
+      <li class="table-header-item">采集任务</li>
+      <li class="table-header-item">状态</li>
+      <li class="table-header-item">执行时间</li>
+      <li class="table-header-item">延迟时间</li>
+      <li class="table-header-item">采集统计</li>
+      <li class="table-header-item">重试次数</li>
+      <li class="table-header-item"></li>
+    </ul>
+    <ul class="table-body-wrapper"
+        *ngFor="let item of allCollectingDataForRender"
+        [style.height]="item.expanded ? '110px' : '40px'">
+      <li class="table-body-item">{{item.ct.cs.csid}}</li>
+      <li class="table-body-item underline-text">{{item.ct.name}}</li>
+      <li class="table-body-item">{{item.status}}</li>
+      <li class="table-body-item">{{item.datetime}}</li>
+      <li class="table-body-item">{{item.delay}}分</li>
+      <li class="table-body-item static">
+        <span>
+          正常数据结果个数:
+          <strong>{{item.dataResultNum}}</strong>
+        </span>
+        <span *ngIf="item.expanded">
+          数据结果个数:
+          <strong>{{item.dataResultSize}}</strong>
+        </span>
+        <span *ngIf="item.expanded">
+          正常数据源个数:
+          <strong>{{item.dataSourceNum}}</strong>
+        </span>
+        <span *ngIf="item.expanded">
+          数据源个数:
+          <strong>{{item.dataSourceSize}}</strong>
+        </span>
+      </li>
+      <li class="table-body-item">
+        <a>25</a>
+      </li>
+      <li class="table-body-item  operate">
+        <em class="table-expander"
+            [class.expanded]="item.expanded"
+            (click)="item.expanded = !item.expanded">
+        </em>
+      </li>
+    </ul>
+  </section>
+  <section class="paginator-wrapper">
+    <mat-paginator [pageSize]="pageSize"
+                   [length]="length"
+                   [pageSizeOptions]="[5, 10, 20, 50]"
+                   (page)="pageChange($event)">
+    </mat-paginator>
+  </section>
+</main>

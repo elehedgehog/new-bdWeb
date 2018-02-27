@@ -1,0 +1,45 @@
+.proccessing_component{
+  position: relative;
+  .home_sort{
+    position: absolute;
+    width: 72px;
+    z-index: 1;
+    top: 0px;
+    right: 100px;
+  }
+  .home_sort_icon{
+    display: inline-block;
+    width: 17.5px;
+    height: 14px;
+    background: url(/assets/img/home_sort.png) 0 0 no-repeat;
+    cursor: pointer;
+    &.on{
+      background-position-x: -17.5px;
+    }
+    &.hover{
+      background-position-x: -17.5px;
+    }
+  }
+  .home_sort_list{
+    list-style: none;
+    background-color: #03153d;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 5px 0;
+    li{
+      z-index: 1;
+      height: 25px;
+      line-height: 25px;
+      font-size: 14px;
+      padding: 0 15px;
+      color: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      &.on{
+        color: #fff;
+      }
+      &.hover{
+        color: #fff;
+      }
+    }
+    
+  }
+}

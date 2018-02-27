@@ -1,0 +1,90 @@
+<main class="collecting-edit-detail">
+  <div>
+    <header class="option-des">数据报文路径</header>
+    <a class="option-wrapper">
+      <input type="text">
+    </a>
+  </div>
+  <div class="time-wrapper">
+    <header class="option-des">任务时间</header>
+    <a class="option-wrapper">
+      <owl-date-time class="datetime-picker"
+                     [styleClass]="'task-edit-datetime-wrapper'"
+                     [locale]="zh">
+      </owl-date-time>
+    </a>
+    <a class="option-wrapper">
+      <owl-date-time class="datetime-picker"
+                     [styleClass]="'task-edit-datetime-wrapper'"
+                     [locale]="zh">
+      </owl-date-time>
+    </a>
+    <em class="arrow"></em>
+  </div>
+  <div>
+    <header class="option-des">标签</header>
+    <a class="label-wrapper">
+      <span class="label-text-container"
+            (click)="isShowLabelPanel = !isShowLabelPanel">数值模型、雷达数据</span>
+      <em></em>
+      <section class="drop-down-container"
+               *ngIf="isShowLabelPanel">
+        <ul class="label-item-wrapper">
+          <li>
+            <em></em>
+            <span>雷达数据</span>
+          </li>
+          <li>
+            <em></em>
+            <span>雷达数据</span>
+          </li>
+          <li>
+            <em></em>
+            <span>雷达数据</span>
+          </li>
+          <li>
+            <em></em>
+            <span>雷达数据</span>
+          </li>
+          <li>
+            <em></em>
+            <span>雷达数据</span>
+          </li>
+        </ul>
+      </section>
+    </a>
+  </div>
+  <div>
+    <header class="option-des">任务执行间隔</header>
+    <a class="option-wrapper">
+      <input type="text">
+    </a>
+  </div>
+  <div>
+    <header class="option-des">报文期望个数</header>
+    <a class="option-wrapper">
+      <input type="text">
+    </a>
+  </div>
+  <div>
+    <header class="option-des">结果期望个数</header>
+    <a class="option-wrapper">
+      <input type="text">
+    </a>
+  </div>
+  <div>
+    <header class="option-des">采集最长延时</header>
+    <a class="option-wrapper">
+      <input type="text">
+    </a>
+  </div>
+  <div>
+    <header class="option-des">重试执行间隔</header>
+    <a class="option-wrapper">
+      <input type="text">
+    </a>
+  </div>
+  <div class="btn-wrapper" *ngIf="isDialog">
+    <span>确定</span>
+  </div>
+</main>

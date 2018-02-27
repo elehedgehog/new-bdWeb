@@ -1,0 +1,103 @@
+<main class="home-container">
+  <app-head-navigation></app-head-navigation>
+  <section class="home-container-outer cf" [style.height]="navPop ? navExtendHeight : '70px' ">
+    <div class="home-container-lsit cf">
+        <header>数据类型:</header>
+        <ul class="cf">
+          <li (click)="toggleDataType('all')"
+              [ngClass]="{'on': 'all' === labelsListSelected}">全选</li>
+          <li *ngFor="let site of labelsList; index as i"
+              (click)="toggleDataType(i)"
+              [ngClass]="{'on': i === labelsListSelected}"> {{ site }}</li>
+        </ul>
+        <a class="cf expander" *ngIf="labelsList.length > 9">
+          <span>更多</span>
+          <em [ngClass]="{'on' : navPop }"
+              (click)="navPop=!navPop"></em>
+        </a>
+    </div>
+  </section>
+  <section class="home-container-chart cf">
+    <section class="processing-state">
+      <div class="processing-state-in"></div>
+      <div class="global-task">
+          <header class="global-title"><span>全局任务状态</span></header>
+          <app-processing-state [label]="labelsListSelected === 'all' ? 'all' : labelsList[labelsListSelected]"></app-processing-state>
+      </div>
+      <div class="task-schedule">
+        <header class="global-title"><span>任务进度</span></header>
+        <app-task-schedule [label]="labelsListSelected === 'all' ? 'all' : labelsList[labelsListSelected]"></app-task-schedule>
+      </div>
+    </section>
+    <section class="processing-notice" [ngClass]="{'show': hasError}">
+      <span>
+        <em></em>
+      </span>
+      <ul>
+        <li class="info">
+          <span class="detail" [title]="errorInfo.first.fileName">{{ errorInfo.first.fileName }}</span><span class="detail">{{ errorInfo.first.time }}</span><span class="detail" [title]="errorInfo.first.message">{{ errorInfo.first.message }}</span>
+          <div class="inner-wrapper" id="error-first">
+            <div class="inner">
+              <span class="detail">{{ errorDetail[1].fileName }}</span><span class="detail">{{ errorDetail[1].time }}</span><span class="detail">{{ errorDetail[1].message }}</span>
+            </div>
+            <div class="inner">
+              <span class="detail">{{ errorDetail[4].fileName }}</span><span class="detail">{{ errorDetail[4].time }}</span><span class="detail">{{ errorDetail[4].message }}</span>
+            </div>
+          </div>
+        </li>
+        <li class="info">
+          <span class="detail" [title]="errorInfo.second.fileName">{{ errorInfo.second.fileName }}</span><span class="detail">{{ errorInfo.second.time }}</span><span class="detail" [title]="errorInfo.second.message">{{ errorInfo.second.message }}</span>
+          <div class="inner-wrapper" id="error-second">
+            <div class="inner">
+              <span class="detail">{{ errorDetail[2].fileName }}</span><span class="detail">{{ errorDetail[2].time }}</span><span class="detail">{{ errorDetail[2].message }}</span>
+            </div>
+            <div class="inner">
+              <span class="detail">{{ errorDetail[5].fileName }}</span><span class="detail">{{ errorDetail[5].time }}</span><span class="detail">{{ errorDetail[5].message }}</span>
+            </div>
+          </div>
+        </li>
+        <li class="info">
+          <span class="detail" [title]="errorInfo.thrid.fileName">{{ errorInfo.thrid.fileName }}</span><span class="detail">{{ errorInfo.thrid.time }}</span><span class="detail" [title]="errorInfo.thrid.message">{{ errorInfo.thrid.message }}</span>
+          <div class="inner-wrapper" id="error-thrid">
+            <div class="inner">
+              <span class="detail">{{ errorDetail[3].fileName }}</span><span class="detail">{{ errorDetail[3].time }}</span><span class="detail">{{ errorDetail[3].message }}</span>
+            </div>
+            <div class="inner">
+              <span class="detail">{{ errorDetail[6].fileName }}</span><span class="detail">{{ errorDetail[6].time }}</span><span class="detail">{{ errorDetail[6].message }}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="processing-collection">
+      <div class="atual-data">
+        <header class="global-title"><span>实时数据采集</span></header>
+        <ul class="collection-category">
+          <li [ngClass]="{'on': visitDmy.key === visitDmyQuaSelected}"
+              *ngFor="let visitDmy of visitDmyQua"
+              (click)="toggleDmy(visitDmy)">{{ visitDmy.text }}</li>
+          <div class="visitSlider" [ngStyle]="{left: visitDmyLeft}"></div>
+        </ul>
+        <div class="processing-collection-background">
+          <app-processing-collection [label]="labelsListSelected === 'all' ? 'all' : labelsList[labelsListSelected]"
+                                     [quaSelected]="visitDmyQuaSelected === 'real' ? 'real' : visitDmyQuaSelected"></app-processing-collection>
+        </div>
+      </div>
+    </section>
+    <section class="processing-statistics">
+      <div class="collect-count">
+        <header class="global-title"><span>数据采集统计</span></header>
+        <ul class="collection-category statistics-category">
+          <li [ngClass]="{'on': quantity.key === visiQuantitySelected}"
+              *ngFor="let quantity of visiQuantity"
+              (click)="toggleQua(quantity)">{{ quantity.text }}</li>
+          <div class="quanSlider" [ngStyle]="{left: quantityLeft}"></div>
+        </ul>
+        <div class="processing-statistics-background">
+          <app-processing-statistics [label]="labelsListSelected === 'all' ? 'all' : labelsList[labelsListSelected]"
+                                     [visiQuantitySelected]="visiQuantitySelected"></app-processing-statistics>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>

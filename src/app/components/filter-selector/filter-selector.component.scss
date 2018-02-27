@@ -1,0 +1,234 @@
+@import "../../theme.scss";
+.filter-container {
+  width: 100%;
+  * {
+    user-select: none;
+  }
+ 
+}
+
+.filter-item-expanded {
+  height: auto !important;
+  overflow: initial !important;
+}
+
+.filter-selected {
+  color: $hoverColor !important;
+}
+
+.filter-item-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 40px;
+  min-height: 40px;
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+  &:not(:last-of-type) {
+    border-bottom: dashed 1px #d2d4db;
+  }
+  &:last-of-type {
+    border-bottom: solid 1px #d2d4db;
+  }
+  >header {
+    color: #989898;
+    float: left;
+    width: 105px;
+    font-size: 14px;
+    line-height: 40px;
+  }
+  ul {
+    width: 1320px - 105px;
+    float: left;
+  }
+  .filter-item {
+    line-height: 40px;
+    color: #575757;
+    margin-right: 50px;
+    float: left;
+    font-size: 14px;
+    cursor: pointer;
+    &:hover {
+      color: $hoverColor;
+    }
+  }
+  .expander {
+    width: 54px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    &:hover {
+      span {
+        background-position-x: -16px;
+      }
+    }
+    span {
+      color: $hoverColor;
+      margin-right: 4px;
+      font-size: 12px;
+      line-height: 40px;
+      font-size: 14px;
+      float: left;
+    }
+    em {
+      line-height: 40px;
+      float: left;
+      width: 16px;
+      height: 10px;
+      transform: translateY(15px);
+      transform-origin: center 5px;
+      background-image: url(/assets/img/processing_dropdown.png);
+      background-repeat: no-repeat;
+      background-position: 0 0;
+    }
+  }
+}
+
+.filter-time-wrapper {
+  input {
+    line-height: 40px;
+    border: solid 1px #989898;
+    height: 24px;
+    width: 60px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    padding: 0 8px;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.filter-btn {
+  background-color: #f7f7f7;
+  width: 50px;
+  height: 20px;
+  font-size: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #575757;
+  border: solid 1px #e1e2e7;
+  margin-left: 6px;
+  &:hover {
+    background-color: #e1e2e7;
+  }
+}
+
+.filter-date-wrapper {
+  display: flex;
+  align-content: center;
+  .datetime-picker {
+    width: 150px;
+  }
+  .date-wrapper {
+    height: 24px;
+    width: 120px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    border: solid 1px #989898;
+    padding: 0 8px;
+    font-size: 14px;
+    display: flex;
+    &:nth-child(1) {
+      .date-icon {
+        transform: translateY(1px) translateX(94px);
+      }
+    }
+    &:nth-child(2) {
+      .date-icon {
+        transform: translateY(1px) translateX(194px);
+      }
+    }
+    >input {
+      height: 20px;
+      padding: 0;
+      width: 80px;
+      transform: translateY(-2px);
+      border: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    .date-icon {
+      width: 15px;
+      height: 16px;
+      line-height: 24px;
+      display: inline-block;
+      background-image: url(/assets/img/processing_date.png);
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      cursor: pointer;
+      &:hover {
+        background-position-x: -15px;
+      }
+    }
+  }
+}
+
+.filter-selected-wrapper {
+  font-size: 14px;
+  line-height: 40px;
+  height: 22px;
+  border-radius: 12px;
+  margin-right: 20px;
+  border: solid 1px #989898;
+  float: left;
+  transform: translateY(9px);
+  padding: 0 0 0 8px;
+  a {
+    float: left;
+    font-size: 12px;
+    line-height: 22px;
+    strong {
+      max-width: 80px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: normal;
+      color: $hoverColor;
+      display: inline-block;
+      vertical-align: middle;
+      overflow: hidden;
+      line-height: 21px;
+    }
+  }
+  span {
+    cursor: pointer;
+    height: 22px;
+    width: 22px;
+    float: right;
+    background: url(/assets/img/processing_dele.png) center center no-repeat;
+  }
+}
+
+.clear-filter-btn {
+  font-size: 12px;
+  line-height: 12px;
+  line-height: 40px;
+  color: $hoverColor;
+  cursor: pointer;
+  float: left;
+}
+
+.filter-panel-toggler {
+  background-color: white;
+  width: 60px;
+  height: 20px;
+  border: solid 1px #d2d2d2;
+  border-top: none;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+  transform: translateY(-1px);
+  &:hover {
+    color: $hoverColor;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.filter-toggler-wrapper {
+  width: 100%;
+}

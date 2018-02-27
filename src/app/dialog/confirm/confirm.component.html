@@ -1,0 +1,19 @@
+<main id="confirm">
+  <header class="header">
+    <span (click)="close()"></span>
+  </header>
+  <div class="content-wrapper">
+    <div class="title">
+      <em [style.backgroundPositionX]="data.type === 'success' ? '-44px' : data.type === 'error' ? '-22px' : '0px' "></em>
+      <span>12321321</span>
+    </div>
+    <div class="content">
+      <em></em>
+      <span></span>
+    </div>
+  </div>
+  <div class="btn-wrapper">
+    <button (click)="confirm()">确定</button>
+    <button (click)="close()">取消</button>
+  </div>
+</main>

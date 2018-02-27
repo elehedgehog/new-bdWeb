@@ -1,0 +1,87 @@
+  @import "../../../theme.scss";
+  .driver-manage {
+    // width: 1320px - 210px - 80px;
+    width: 1030px;
+    >header {
+      width: 100%;
+      font-size: 18px;
+      font-weight: bold;
+      color: #1c1c1c;
+      height: 18px;
+      line-height: 18px;
+      margin-bottom: 20px;
+      a {
+        float: right;
+        height: 100%;
+        display: flex;
+        text-align: center;
+        span {
+          width: 100px;
+          line-height: 30px;
+          cursor: pointer;
+          font-size: 14px;
+          height: 30px;
+          border-radius: 15px;
+          color: white;
+          display: block;
+          background-color: #ff6c60;
+          &:hover {
+            background-color: #f86c5f;
+          }
+          &:first-of-type {
+            background-color: $hoverColor;
+            &:hover {
+              background-color: $hoverColorDarker;
+            }
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .table-wrapper {
+    display: flex;
+    width: 175px + 178px + 335px + 178px + 168px;
+    flex-wrap: wrap;
+    li {
+      display: flex;
+      border-bottom: solid 1px #d2d4db;
+      font-size: 14px;
+      color: #1c1c1c;
+      &:first-of-type {
+        border-top: solid 1px #d2d4db;
+      }
+      >span {
+        text-align: center;
+        border-left: solid 1px #d2d4db;
+        height: 40px;
+        box-sizing: border-box;
+        width: 130px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        line-height: 39px;
+        &:last-of-type {
+          border-right: solid 1px #d2d4db;
+        }
+        &:nth-child(6) {
+          width: 256px;
+        }
+      }
+      &:not(:first-of-type) {
+        span:last-of-type{
+          color: $hoverColor;
+          cursor: pointer;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .paginator-wrapper {
+    width: 100%;
+    padding: 0;
+  }

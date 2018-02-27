@@ -1,0 +1,185 @@
+@import "../../../theme.scss";
+.create-user {
+  width: 512px - 40px;
+  background-color: whitel;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.header {
+  width: 100%;
+  background-color: white;
+  position: relative;
+  margin: 0 0 20px 0;
+  h1 {
+    font-size: 16px;
+    margin: 0;
+    height: 16px;
+    color: #1c1c1c;
+    line-height: 16px;
+  }
+  span {
+    width: 17px;
+    display: block;
+    height: 18px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-image: url(/assets/img/processing_close.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+    &:hover {
+      background-position-x: -16px;
+    }
+  }
+}
+
+.user-info {
+  width: 100%;
+  header {
+    width: 100%;
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px
+  }
+  ul {
+    width: 100%;
+    li {
+      display: flex;
+      height: 44px;
+      font-size: 14px;
+      color: #1c1c1c;
+      display: flex;
+      span {
+        width: 115px;
+        align-self: center;
+      }
+      input {
+        align-self: center;
+        padding-left: 12px;
+        height: 34px;
+        width: 208px;
+        box-sizing: border-box;
+        border: solid 1px #ebedf1;
+        border-radius: 17px;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+.server-info {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  >header {
+    width: 100%;
+    font-size: 14px;
+    display: block;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px
+  }
+  div {
+    width: 50%;
+    header {
+      width: 100%;
+      height: 14px;
+      line-height: 14px;
+      margin-bottom: 15px;
+    }
+    ul {
+      width: 100%;
+      box-sizing: border-box;
+      border: solid 1px #ebedf1;
+      height: 330px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      li {
+        width: 100%;
+        cursor: pointer;
+        color: #1c1c1c;
+        height: 40px;
+        line-height: 40px;
+        box-sizing: border-box;
+      }
+    }
+    .server-list-wrapper>li {
+      div {
+        padding-left: 40px;
+        display: flex;
+        box-sizing: border-box;
+        align-content: center;
+        height: 100%;
+        width: 100%;
+        &:hover,
+        &.active {
+          background-color: #ebedf1;
+        }
+      }
+    }
+    .role-list-wrapper {
+      border-left: none;
+      li {
+        display: flex;
+        align-content: center;
+        padding-left: 30px;
+        cursor: pointer;
+        div {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-content: center;
+        }
+        &:hover {
+          span {
+            color: $hoverColor;
+          }
+        }
+        em {
+          align-self: center;
+          width: 12px;
+          height: 12px;
+          display: block;
+          margin-right: 10px;
+          background-image: url(/assets/img/admin_rb.png);
+          background-position: -12px 0;
+          &.active {
+            background-position: 0px;
+          }
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+.btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  height: 30px;
+  span {
+    height: 30px;
+    border-radius: 15px;
+    width: 100px;
+    text-align: center;
+    background-color: $hoverColor;
+    cursor: pointer;
+    line-height: 30px;
+    color: white;
+    cursor: pointer;
+    &:hover {
+      background-color: $hoverColorDarker;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<main class="create-user">
+  <header class="header">
+    <h1>{{isEdit ? '编辑' : '新增' }}用户</h1>
+    <span (click)="close()"></span>
+  </header>
+  <section class="body-wrapper">
+    <div class="user-info">
+      <header>基础信息</header>
+      <ul>
+        <li>
+          <span>用户名</span>
+          <input [(ngModel)]="username"
+                 type="text">
+        </li>
+        <li>
+          <span>密码</span>
+          <input type="text"
+                 [(ngModel)]="password">
+        </li>
+        <li>
+          <span>联系方式</span>
+          <input type="text"
+                 [(ngModel)]="phone">
+        </li>
+      </ul>
+    </div>
+    <div class="server-info">
+      <header>基础信息</header>
+      <div>
+        <header style="font-size: 14px">服务器</header>
+        <ul class="server-list-wrapper">
+          <li *ngFor="let item of serverData">
+            <div [class.active]="item.active"
+                 (click)="activeServer(item)">{{item.csid}} {{hasSelectedRole(item) ? '' : '*'}}</div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <header style="font-size: 14px">角色</header>
+        <ul class="role-list-wrapper">
+          <li *ngFor="let item of serverRoleData">
+            <div *ngIf="activeServerId"
+                 (click)="selectRole(item)">
+              <em [class.active]="item.isSelected"></em>
+              <span>{{item.name}}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="btn-wrapper">
+      <span (click)="submit()">确定</span>
+    </div>
+  </section>
+</main>

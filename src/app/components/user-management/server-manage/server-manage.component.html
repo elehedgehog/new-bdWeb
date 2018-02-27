@@ -1,0 +1,32 @@
+<main class="server-manage">
+  <header>服务器配置</header>
+  <section class="table-wrapper">
+    <ul class="role-list">
+      <li class="header">
+        <span>#</span>
+        <span>服务器名称</span>
+      </li>
+      <li class="item"
+          *ngFor="let item of serverData; let i = index">
+        <div (click)="activeServer(item)"
+             [class.active]="item.active">
+          <span>{{i + 1}}</span>
+          <span>{{item.csid}}</span>
+        </div>
+      </li>
+    </ul>
+    <ul class="power-detail"
+        *ngIf="activeServerId">
+      <li class="header">
+        <span>成员名称</span>
+        <span>角色</span>
+        <span>操作</span>
+      </li>
+      <li *ngFor="let item of userData">
+        <span>{{item.username}}</span>
+        <span>{{item.name}}</span>
+        <span (click)="editServer(item)">编辑</span>
+      </li>
+    </ul>
+  </section>
+</main>

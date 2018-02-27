@@ -1,0 +1,111 @@
+@import "../../theme.scss";
+.wrapper {
+  width: 1320px;
+  height: 70px;
+  margin: 0 auto;
+}
+
+.head-nav {
+  background-color: $headNavBackgroundColor;
+  width: 100%;
+  height: 70px;
+  padding-left: calc(100vw - 100%);
+  box-sizing: border-box;
+}
+
+.icon-wrapper {
+  height: 70px;
+  width: 225px;
+  cursor: pointer;
+  .icon {
+    width: 36px;
+    height: 70px;
+    background: url('/assets/img/home_logo.png') center center no-repeat;
+    float: left;
+  }
+  a {
+    font-size: 24px;
+    color: white;
+    line-height: 70px;
+    margin-left: 20px;
+  }
+}
+
+section {
+  float: left;
+  &:focus {
+    outline: none !important;
+  }
+}
+
+.router-link-wrapper {
+  margin-left: 105px;
+  height: 100%;
+  line-height: 70px;
+  .first-tier {
+    height: 100%;
+    &.active {
+      span {
+        display: none;
+      }
+    }
+    >li {
+      float: left;
+      width: 100px;
+      height: 100%;
+      display: block;
+      margin-right: 70px;
+      position: relative;
+      cursor: pointer;
+      &:focus {
+        outline: none !important;
+      }
+      &:hover{
+        .second-tier{
+          display: block;
+        }
+      }
+      a {
+        color: white;
+        line-height: 70px;
+        height: 70px;
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+      span {
+        background-color: $hoverColor;
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+  .second-tier {
+    z-index: 1;
+    display: none;
+    position: absolute;
+    height: 80px;
+    bottom: -80px;
+    left: -10px;
+    li {
+      &:focus {
+        outline: none !important;
+      }
+      display: block;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      width: 120px;
+      color: white;
+      cursor: pointer;
+      background-color: $headNavBackgroundColor;
+      &:hover {
+        background-color: $hoverColor;
+      }
+    }
+  }
+}

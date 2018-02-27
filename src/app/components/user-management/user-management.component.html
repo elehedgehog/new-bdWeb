@@ -1,0 +1,20 @@
+<main class="user-management">
+  <section class="nav-wrapper">
+    <header>用户管理</header>
+    <ul>
+      <li routerLinkActive="active" 
+          routerLink="power">角色管理</li>
+      <li routerLinkActive="active" 
+          routerLink="role">用户管理</li>
+      <li routerLinkActive="active" 
+          routerLink="server">服务器管理</li>
+      <li routerLinkActive="active" 
+          routerLink="audict">用户审核</li>
+      <li routerLinkActive="active" 
+          routerLink="driver">采集驱动管理</li>
+    </ul>
+  </section>
+  <section class="router-wrapper">
+    <router-outlet></router-outlet>
+  </section>
+</main>

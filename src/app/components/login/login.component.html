@@ -1,0 +1,72 @@
+<main class="login">
+  <section class="login-border">
+    <div class="login-page" *ngIf="loginPop">
+        <p class="login-icon"></p>
+        <p class="login-title">大数据服务平台</p>
+        <p class="username">
+          <input type="text" placeholder="用户名/手机号" [(ngModel)]="loginName">
+        </p>
+        <p class="password">
+          <input type="password" placeholder="密码" [(ngModel)]="loginPass">
+        </p>
+        <button class="login-btn" (click)="getLogin()">登录</button>
+        <p class="password-operate">
+          <i class="remember-icon" 
+             (click)="toggleRememberPass()"
+             [ngClass]="{'on': remberSelected}"></i>
+          <span class="remember-password">记住密码</span>
+          <span class="forget-password" (click)="forgetPassBtn()">忘记密码</span>
+        </p>
+        <p class="line-between"></p>
+        <p class="line-shadow"></p>
+        <p class="register-account" (click)="registerBtn()">注册账号</p>
+    </div>
+    <div class="register-admin" *ngIf="registerPop">
+        <header>注册</header>
+        <p class="username">
+          <input type="text" placeholder="用户名" [(ngModel)]="username">
+        </p>
+        <p class="username">
+          <input type="text" placeholder="手机号" [(ngModel)]="enrollPhone">
+        </p>
+        <p class="password">
+          <input type="password" placeholder="密码" [(ngModel)]="password">
+        </p>
+        <p class="username identify-code">
+          <input type="text" placeholder="验证码" [(ngModel)]="identifyingCode">
+          <img (click)="changeEnrollPhoneHolder()"  
+               [src]="identifyingData.url"
+               title="点击更换验证码">
+        </p>
+        <p class="username">
+          <input type="text" placeholder="手机验证码" [(ngModel)]="telIdentifyingCode">
+          <span class="get-code" (click)="getMessage()">获取验证码</span>
+        </p>
+        <button class="login-btn" (click)="toggleRegister()">注册</button>
+        <p class="register-account return-login" (click)="loginPop=true;registerPop=false">回到登录</p>
+    </div>
+    <div class="forgetPsw-page" *ngIf="forgetPswPop">
+        <header>忘记密码</header>
+        <p class="username">
+          <input type="text" placeholder="手机号" [(ngModel)]="retrievePhone">
+        </p>
+        <p class="username identify-code">
+          <input type="text" placeholder="验证码" [(ngModel)]="retrieveCode">
+          <img (click)="changeEnrollPhoneHolder()"  
+              [src]="identifyingData.url"
+              title="点击更换验证码">
+        </p>
+        <p class="username">
+          <input type="text" placeholder="手机验证码" [(ngModel)]="retrieveTelCode"><span class="get-code" (click)="getForMess()">获取验证码</span>
+        </p>
+        <p class="password">
+          <input type="password" placeholder="新密码" [(ngModel)]="newPsw">
+        </p>
+        <p class="password">
+          <input type="password" placeholder="确认新密码"  [(ngModel)]="newPswConfirm">
+        </p>
+        <button class="login-btn" (click)="resetPassword()">确定</button>
+        <p class="register-account return-login" (click)="loginPop=true;forgetPswPop=false">回到登录</p>
+    </div>
+  </section>
+</main>

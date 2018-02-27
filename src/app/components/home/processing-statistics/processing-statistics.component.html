@@ -1,0 +1,10 @@
+<main class="proccessing_component">
+  <div class="home_sort">
+    <i  [ngClass]="{'on': sortPop}" class="home_sort_icon" (click)="sortPop =!sortPop"></i>
+    <ul class="home_sort_list" *ngIf="sortPop">
+      <li (click)="toggleSortWay('size')" [ngClass]="{'on': order === 'size'}">按大小</li>
+      <li (click)="toggleSortWay('num')" [ngClass]="{'on': order === 'num' }">按个数</li>
+    </ul>
+  </div>
+  <div id="ProcessingStatistics" style="width: 1320px;height:529px;"></div>
+</main>

@@ -1,0 +1,16 @@
+<main>
+  <ul class="taskSchedule_ul">
+    <li class="taskSchedule_list" *ngFor="let item of tasksScheduleList">
+      <div class="taskSchedule_border">
+        <div class="taskSchedule_img">
+          <span></span>
+        </div>
+        <div class="taskSchedule_con">
+          <p class="taskSchedule_con_name">{{ item.name || 0 }}</p>
+          <p class="taskSchedule_con_hint finished"
+            [ngClass]="item.status">{{ status[item.status || 0]}}</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</main>

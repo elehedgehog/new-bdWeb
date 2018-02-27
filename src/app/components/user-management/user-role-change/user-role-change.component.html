@@ -1,0 +1,32 @@
+<main class="user-role-change">
+  <header class="header">
+    <h1>服务器角色配置</h1>
+    <span (click)="close()"></span>
+  </header>
+  <section class="body-wrapper">
+    <div class="server-info">
+      <header>基础信息</header>
+      <div>
+        <header style="font-size: 14px">服务器</header>
+        <ul class="server-list-wrapper">
+          <li style="font-size: 14px"
+              class="active">{{data.csid}}</li>
+        </ul>
+      </div>
+      <div>
+        <header style="font-size: 14px">角色</header>
+        <ul class="role-list-wrapper">
+          <li *ngFor="let item of roleData">
+            <div (click)="selectRole(item)">
+              <em [class.active]="item.isSelected"></em>
+              <span style="font-size: 14px">{{item.name}}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="btn-wrapper">
+      <span (click)="close()">确定</span>
+    </div>
+  </section>
+</main>

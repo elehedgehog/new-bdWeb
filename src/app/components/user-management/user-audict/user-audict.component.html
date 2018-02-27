@@ -1,0 +1,37 @@
+<main class="user-audict">
+  <header>
+    <span [class.active]="!isPass"
+          (click)="toggleIsPass()">未通过</span>
+    <span [class.active]="isPass"
+          (click)="toggleIsPass()">已通过</span>
+    <em [style.transform]="isPass ? 'translateX(90px)' : ''"></em>
+  </header>
+  <ul class="table-wrapper">
+    <li class="header">
+      <span>ID</span>
+      <span>用户名</span>
+      <span>联系方式</span>
+      <span>注册时间</span>
+      <span>操作</span>
+    </li>
+    <li *ngFor="let item of userData">
+      <span>{{item.uid}}</span>
+      <span>{{item.username}}</span>
+      <span>{{item.phone}}</span>
+      <span>{{getTimeText(item.time)}}</span>
+      <a>
+        <span *ngIf="!isPass"
+              (click)="editUser(item, true)">通过</span>
+        <span *ngIf="!isPass"
+              (click)="editUser(item, false)">不通过</span>
+      </a>
+    </li>
+  </ul>
+  <div class="paginator-wrapper">
+    <mat-paginator [length]="getLength()"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[5, 10, 20, 50]"
+                   (page)="pageChange($event)">
+    </mat-paginator>
+  </div>
+</main>

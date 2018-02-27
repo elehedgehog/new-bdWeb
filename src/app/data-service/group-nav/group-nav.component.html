@@ -1,0 +1,13 @@
+<main class="group-nav">
+  <div class="self-wrapper"
+       [style.paddingLeft]="treeNodeIndex * 13 + 'px'"
+       (click)="isChileExpanded = !isChileExpanded">
+    <em [class.active]="isChileExpanded"></em>
+    <span>{{data.text + treeNodeIndex}}</span>
+  </div>
+  <div #chileContainer
+       [hidden]="!isChileExpanded"
+       class="chile-wrapper">
+    <div #chileContainerForInsert></div>
+  </div>
+</main>

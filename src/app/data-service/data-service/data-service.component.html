@@ -1,0 +1,45 @@
+<app-head-navigation></app-head-navigation>
+<main class="data-service">
+  <section class="nav-wrapper">
+    <header>数据服务</header>
+    <div class="search-wrapper">
+      <em></em>
+      <input placeholder="搜索" type="text">
+    </div>
+    <app-group-nav *ngFor="let item of testNavData"
+                   [data]="item"></app-group-nav>
+  </section>
+  <section class="service-detail-wrapper">
+    <div class="des-wrapper">
+      <header>接口信息</header>
+      <ul>
+        <li>说明: XXXXXXXXXXXXXXXXXXX</li>
+        <li>样例：12312321321</li>
+      </ul>
+    </div>
+    <div class="args-wrapper">
+      <header>接口参数</header>
+      <app-single-select></app-single-select>
+      <app-single-select></app-single-select>
+      <app-single-select></app-single-select>
+      <app-multi-select></app-multi-select>
+      <span class="btn">确定</span>
+    </div>
+  </section>
+  <section class="request-wrapper"
+           [hidden]="true">
+    <div class="toggler-wrapper">
+      <span></span>
+    </div>
+    <div class="option-body">
+      <a class="option-wrapper">
+        <span></span>
+        <input type="text">
+        <em></em>
+      </a>
+      <a class="result-wrapper"></a>
+    </div>
+    <div class="request-history-wrapper">
+    </div>
+  </section>
+</main>

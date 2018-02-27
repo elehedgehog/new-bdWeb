@@ -1,0 +1,219 @@
+<main class="data-storage">
+    <app-head-navigation></app-head-navigation>
+  <section class="data-storage-border">
+      <section class="data-storage-content cf">
+        <div class="capacity-ratio">
+          <ul>
+            <li [ngClass]="{'on': scale.key === scaleSelected }" (click)="toggleScale(scale)" *ngFor="let scale of scaleList">{{ scale.text}}</li>
+            <div class="scaleSlider" [ngStyle]="{left: scaleLeft}"></div>
+          </ul>
+          <div id="dataScale" style="width: 580px;height:380px;"></div>
+        </div>
+        <div class="data-capacity">
+          <ul class="data-capacity-title">
+            <li>数据总容量</li>
+            <li>{{ dataTotalspace }}</li>
+            <li>数据总个数</li>
+            <li>{{ dataCounts }} 个</li>
+          </ul>
+          <ul class="data-capacity-data">
+            <li *ngFor="let item of spaceList[currentPage]">
+              <span>{{ item.name }}</span>
+              <span>[{{ item.id }}]</span>
+              <span>
+                <ul class="progress-list">
+                  <li [ngStyle]="{'width': item.percentdbspace +'%'}"
+                      (mousemove)="mouseOverClick('percentdbspace',item)" 
+                      (mouseout)="mouseOutClick('percentdbspace',item)"></li>
+                  <li [ngStyle]="{'width': item.percentfreespace +'%'}"
+                      (mousemove)="mouseOverClick('percentfreespace',item)" 
+                      (mouseout)="mouseOutClick('percentfreespace',item)"></li>
+                  <li [ngStyle]="{'width': item.percentotherspace +'%'}"
+                      (mousemove)="mouseOverClick('percentotherspace',item)" 
+                      (mouseout)="mouseOutClick('percentotherspace',item)"></li>
+                </ul>
+              </span>
+            </li>
+          </ul>
+          <div class="page-btn">
+            <button *ngFor="let el of spaceList;index as i" 
+                    [ngClass]="{on: i === currentPage}"
+                    [hidden]="i === spaceList.length - 1" 
+                    (click)="togglePage(i)">{{ i*10 + 1 }}-{{ (i+1)*10 }}</button>
+            <button *ngIf="spaceList[spaceList.length - 1]" 
+                    [ngClass]="{on: spaceList.length - 1 === currentPage}"
+                    (click)="togglePage(spaceList.length - 1)"
+                    [hidden]="spaceList.length <= 1">
+              {{ (spaceList.length - 1)*10 + 1 }}-{{ (spaceList.length - 1)*10 + spaceList[spaceList.length - 1].length }}
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="data-storage-server cf" [style.height]="serverPop ? serverExtendHeight : '60px' ">
+        <header>服务器：</header>
+        <ul>
+          <li [ngClass]="{'on': '' === serverSelected}"
+              (click)="toggleServer('')">
+            <span>全选</span>
+          </li>
+          <li *ngFor="let item of serverList" 
+              [ngClass]="{'on': item.id === serverSelected}"
+              (click)="toggleServer(item.id)">
+            <span [title]="item.name">{{ item.name }}</span>
+          </li>
+        </ul>
+        <span class="more-btn"  *ngIf="serverList.length > 12" (click)="serverPop=!serverPop">更多</span>
+      </section>
+      <section class="data-storage-list cf">
+        <ul>
+          <li *ngFor="let item of fieldList"
+              (click)="toggleDataContent(item,item.datatype,item.collectname)"
+              [ngClass]="{'on': item.datatype === dateContentSelected, 'click-hover': item.type!='file'}">
+            <header><i [class]="item.datatype"></i>{{ item.collectname }}</header>
+            <dl class="cf">
+              <dt>数据容量</dt>
+              <dd>{{ dataFormat(item.datasize) }}</dd>
+            </dl>
+            <dl class="cf">
+              <dt>数据个数</dt>
+              <dd>{{ item.datacount }} 个</dd>
+            </dl>
+            <dl class="cf">
+              <dt>平均数据大小</dt>
+              <dd>{{ dataFormat(item.avgobjsize) }}</dd>
+            </dl>
+            <dl class="cf">
+              <dt>最新数据时间</dt>
+              <dd>{{ item.datatime ? getTimeText(item.datatime) : '未知' }}</dd>
+            </dl>
+            <dl class="cf">
+              <dt>预计增长容量</dt>
+              <dd>{{ dataFormat(item.expectgrowth) }}</dd>
+            </dl>
+          </li>           
+        </ul>
+      </section>
+      <section *ngIf="dataContentPop" class="dataContent">
+          <div class="dataContent-inside">
+              <i class="close-icon" (click)="dataContentPop = false;searchPop = false"></i>
+              <header><i [class]="scaleSelected"></i>{{ frameName }}</header>
+              <!-- <div *ngIf="scaleSelected === 'grid'">
+                <div class="dataContent-inside-left">
+                  <div class="dataContent-inside-progress">
+                    <p><span style="width: 20%"></span></p><span>20%</span>
+                  </div>
+                  <ul>
+                    <li>
+                      <span>element</span><span>1</span>
+                    </li>
+                    <li><span>top</span><span>1</span></li>
+                    <li><span>bottom</span><span>1</span></li>
+                    <li><span>left</span><span>1</span></li>
+                    <li><span>right</span><span>1</span></li>
+                    <li><span>rows</span><span>1</span></li>
+                    <li><span>cols</span><span>1</span></li>
+                  </ul>
+                </div>
+                <div class="dataContent-inside-right">
+                  <div class="dataContent-inside-progress">
+                    <p><span style="width: 20%"></span></p><span>20%</span>
+                  </div>
+                  <ul>
+                    <li>
+                      <span>element</span><span>1</span>
+                    </li>
+                    <li><span>top</span><span>1</span></li>
+                    <li><span>bottom</span><span>1</span></li>
+                    <li><span>left</span><span>1</span></li>
+                    <li><span>right</span><span>1</span></li>
+                    <li><span>rows</span><span>1</span></li>
+                    <li><span>cols</span><span>1</span></li>
+                  </ul>
+                </div>
+              </div> -->
+              <div *ngIf="scaleSelected === 'map'||'grid'">
+                <div class="key-value-left">
+                  <div class="scrollbar key-value-list">
+                    <ul class="key-value-top">
+                      <li [ngClass]="{'on': detailSelected === item.field}"
+                          *ngFor="let item of detailList" 
+                          [hidden]="item && item.fieldtype === 2" 
+                          [style.height]="(searchPop && detailSelected === item.field) ? '75px' : '34px'"
+                          (click)="toggleSearch(item)">
+                        <p class="serch-button">
+                            <!-- <i class="search-icons" (click)="searchPop=!searchPop"></i> -->
+                            <span class="storage_arrow"></span>
+                            <span class="search-field">{{ item.field }}</span>
+                            <span class="search-percent">{{ item.percent }}%</span>
+                            <span class="search-icon" *ngIf="valuesSelected !== null && fields[valuesSelected] && fields[valuesSelected].includes(item.field)"></span>
+                        </p> 
+                        <!-- <p class="search-border" *ngIf="searchPop && detailSelected === item.field">
+                          <select name="" id="">
+                            <option value="">大于</option>
+                            <option value="">大于等于</option>
+                            <option value="">小于</option>
+                            <option value="">小于等于</option>
+                            <option value="">等于</option>
+                            <option value="">模糊搜索</option>
+                          </select>
+                          <input >
+                        </p>   -->
+                      </li>
+                      <p class="content-line">
+                        <span>content</span>
+                        <span></span>
+                      </p>
+                      <li [ngClass]="{'on': detailSelected === item.field}"
+                          [hidden]="item && item.fieldtype === 1 ||item && item.fieldtype === 3 "
+                          *ngFor="let item of detailList" 
+                          [style.height]="(searchPop && detailSelected === item.field) ? '75px' : '34px'"
+                          (click)="toggleSearch(item)">
+                          <p class="serch-button">
+                            <!-- <i class="search-icons" (click)="searchPop=!searchPop"></i> -->
+                            <span class="storage_arrow"></span>
+                            <span class="search-field">{{ item.field }}</span>
+                            <span class="search-percent">{{ item.percent }}%</span>
+                            <span class="search-icon" *ngIf="valuesSelected !== null && fields[valuesSelected] && fields[valuesSelected].includes(item.field)"></span>
+                          </p> 
+                          <!-- <p class="search-border" *ngIf="searchPop && detailSelected === item.field">
+                            <select name="" id="">
+                              <option value="">大于</option>
+                              <option value="">大于等于</option>
+                              <option value="">小于</option>
+                              <option value="">小于等于</option>
+                              <option value="">等于</option>
+                              <option value="">模糊搜索</option>
+                            </select>
+                            <input >
+                          </p>   -->
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="key-value-right scrollbar">
+                  <div class="wrapper" [ngStyle]="{width: elements.length * 70 + 20 + 'px'}">
+                    <ul class="right-header cf">
+                      <li *ngFor="let item of elements">{{ item }}</li>
+                    </ul>
+                    <ul class="right-content scrollbar cf" >
+                      <li *ngFor="let item of values;index as i" 
+                          (click)="toggleValue(i)"
+                          [ngClass]="{'on': valuesSelected === i}"> 
+                        <span  *ngFor="let i of item">{{ i }}</span>
+                      </li>
+                    </ul>
+                    <p class="page-number" *ngIf="values.length">
+                      <span (click)="downPage()"></span> <span>{{detailIndexCurrentPage}}</span> <span (click)="upPage()"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </section>
+  </section>
+  <div class="mouse-data" *ngIf="mousePop" [ngStyle]="{top: popupY - 30 + 'px', left: popupX + 15 + 'px'}">
+    <p>{{ floatingWindowName }}</p>
+    <p>{{ floatingWindowPercent }}</p>
+    <p>{{ floatingWindowSize }}</p>
+  </div>
+</main>

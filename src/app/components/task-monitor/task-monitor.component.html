@@ -1,0 +1,202 @@
+<app-head-navigation></app-head-navigation>
+<main class="task-monitor">
+  <header class="description">任务监控</header>
+
+  <app-filter-selector (filterChange)="filterChange($event)"></app-filter-selector>
+
+  <section class="task-table-container">
+    <ul class="table-header-wrapper">
+      <li class="table-header-item">#</li>
+      <li class="table-header-item">采集驱动</li>
+      <li class="table-header-item">采集任务</li>
+      <li class="table-header-item">状态</li>
+      <li class="table-header-item">最后执行时间</li>
+      <li class="table-header-item">占用资源</li>
+      <li class="table-header-item">采集统计</li>
+      <li class="table-header-item">操作</li>
+    </ul>
+    <ul class="table-body-wrapper"
+        *ngFor="let item of allCollectingDataForRender; let i = index">
+      <li class="table-body-item"
+          style="width: 62px">{{i + 1}}</li>
+      <li class="table-body-item task"
+          style="width: 144px">
+        <a>{{item.egName}}</a>
+        <span></span>
+      </li>
+
+      <li class="table-detail-container">
+        <ul class="table-detail-wrapper"
+            *ngFor="let subItem of item.cts">
+          <li class="table-detail-item"
+              (click)="lookingTaskDetail(subItem)"
+              style="color: #007ae1; text-decoration: underline; cursor: pointer">{{subItem.name}}</li>
+          <li class="table-detail-item"
+              style="color: #eb414f;">{{subItem.statusText}}</li>
+          <li class="table-detail-item"
+              style="color: #989898">{{subItem.lastExecuteTime}}</li>
+          <li class="table-detail-item resource-taken">
+            <div class="progress-wrapper">
+              <span class="progress-text">内存</span>
+              <a class="progress-bar-wrapper">
+                <span class="progress-bar"></span>
+                <span class="progress-bar"
+                      [style.width]="subItem.usedMemory > 100 ? 100 + '%' : (subItem.usedMemory * 100).toFixed(2) + '%'"></span>
+              </a>
+              <span class="current-result">{{(subItem.usedMemory * 100).toFixed(2)}}%</span>
+            </div>
+            <div class="progress-wrapper">
+              <span class="progress-text">CPU</span>
+              <a class="progress-bar-wrapper">
+                <span class="progress-bar"></span>
+                <span class="progress-bar"
+                      [style.width]="subItem.usedCpu > 100 ? 100 + '%' : (subItem.usedCpu * 100).toFixed(2) + '%'"></span>
+              </a>
+              <span class="current-result">{{subItem.usedCpu > 100 ? 100 : (subItem.usedCpu * 100).toFixed(2)}}%</span>
+            </div>
+            <div class="progress-detail-wrapper"
+                *ngIf="subItem.isExpanded">
+              <article>
+                <header>硬盘</header>
+                <a>读取:
+                  <strong>{{subItem.readSpeed
+                    < 1024 ? subItem.readSpeed + 'KB/s' : (subItem.readSpeed / 1024).toFixed(2) + 'MB/s' }}</strong>
+                </a>
+                <a>写入:
+                  <strong>{{subItem.writeSpeed < 1024 ? subItem.writeSpeed + 'KB/s' : (subItem.writeSpeed / 1024).toFixed(2) + 'MB/s'}}</strong>
+                </a>
+              </article>
+              <article>
+                <header>网络</header>
+                <a>上行:
+                  <strong>{{subItem.upload < 1024 ? subItem.upload + 'KB/s' : (subItem.upload / 1024).toFixed(2) + 'MB/s'}}</strong>
+                </a>
+                <a>下行:
+                  <strong>{{subItem.download < 1024 ? subItem.download + 'KB/s' : (subItem.download / 1024).toFixed(2) + 'MB/s'}}</strong>
+                </a>
+              </article>
+            </div>
+          </li>
+          <li class="table-detail-item collection-result">
+            <div class="result-text">
+              读取报文
+              <strong>{{subItem.totalDataSourceNum}}</strong>
+              个
+            </div>
+            <div class="result-text">
+              读取报文
+              <strong>{{getPublishText(subItem.totalDataSourceSize)}}</strong>
+            </div>
+            <div class="result-text"
+                *ngIf="subItem.isExpanded">
+              生成数据
+              <strong>{{subItem.totalResultNum}}</strong>
+              个
+            </div>
+            <div class="result-text"
+                *ngIf="subItem.isExpanded">
+              生成数据
+              <strong>{{subItem.totalResultSize}}G</strong>
+            </div>
+          </li>
+          <li class="table-detail-item edit">
+            <span class="edit-btn"
+                  (click)="editTask(subItem)">编辑</span>
+            <em class="table-expander"
+                [class.expanded]="subItem.isExpanded"
+                (click)="subItem.isExpanded = !subItem.isExpanded"></em>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="processing-add" (click)="toggleNewTask()"></div>
+  </section>
+
+  <section class="paginator-wrapper">
+    <mat-paginator [pageSize]="pageSize"
+                  [length]="allCollectingData.length"
+                  [pageSizeOptions]="[5, 10, 20, 50]"
+                  (page)="pageChange($event)">
+    </mat-paginator>
+  </section>
+
+  <section class="new-task" *ngIf="newTaskPop">
+    <header class="header">
+      <h1>新建任务</h1>
+      <span (click)="newTaskPop=false"></span>
+    </header>
+    <ul class="new-task-step">
+      <li [ngClass]="{'on': step === 1}"><span>1</span></li>
+      <li [ngClass]="{'on': step === 2}"><span>2</span></li>
+      <li [ngClass]="{'on': step === 3}"><span>3</span></li>
+    </ul>
+    <div class="new-task-one" *ngIf="step === 1">
+      <p class="task-one-number">1、选择服务器</p>
+      <ul class="task-one-title cf">
+        <li>服务器</li>
+        <li>IP</li>
+      </ul>
+      <div class="ul-wrapper">
+        <ul class="task-one-content cf scrollbar">
+          <li>
+            <span>chxxj</span>
+            <span>[10.148.84.4:2192]</span>
+          </li>
+          <li>
+            <span>chxxj</span>
+            <span>[10.148.84.4:2192]</span>
+          </li>
+          <li>
+            <span>chxxj</span>
+            <span>[10.148.84.4:2192]</span>
+          </li>
+          <li>
+            <span>chxxj</span>
+            <span>[10.148.84.4:2192]</span>
+          </li>
+          <li>
+            <span>chxxj</span>
+            <span>[10.148.84.4:2192]</span>
+          </li>
+          <li>
+            <span>chxxj</span>
+            <span>[10.148.84.4:2192]</span>
+          </li>
+          <li>
+            <span>chxxj</span>
+            <span>[10.148.84.4:2192]</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="new-task-two" *ngIf="step === 2">
+      <p class="task-two-number">2、选择采集驱动</p>
+      <ul class="task-two-title cf">
+        <li>驱动名称</li>
+        <li>主版本</li>
+        <li>次版本</li>
+        <li>中文名称</li>
+        <li>作者</li>
+        <li>描述</li>
+      </ul>
+      <ul class="task-two-content cf scrollbar">
+        <li *ngFor="let item of driverList">
+          <span>{{ item.name }}</span>
+          <span>{{ item.versiono }}</span>
+          <span>{{ item.versiont }}</span>
+          <span>{{ item.cname }}</span>
+          <span>{{ item.author }}</span>
+          <span>{{ item.content }}</span>
+        </li>
+      </ul>
+    </div>
+    <div style="margin-bottom: 25px;" *ngIf="step === 3">
+      <app-collecting-edit-detail [data]="123" [isDialog]="false"></app-collecting-edit-detail>
+    </div>
+    <div class="new-task-btn">
+      <span class="new-task-forward" (click)="forwardStep()">上一步</span>
+      <span class="new-task-next" (click)="nextStep()" *ngIf="step === 1 || step === 2">下一步</span>
+      <span class="new-task-next" (click)="finishStep()"  *ngIf="step === 3">完成</span>
+    </div>
+  </section>
+</main>

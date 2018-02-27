@@ -1,0 +1,20 @@
+<main class="multi-level-select">
+  <div class="text-container">
+    asdasdasdasdsa
+  </div>
+  <div class="option-wrapper">
+    <section class="input-wrapper">
+      <span></span>
+      <em></em>
+    </section>
+    <section class="popup-wrapper"
+             (mouseleave)="closePopup($event)">
+      <ul class="select-wrapper">
+        <li *ngFor="let item of selectData"
+            (click)="selectOption(item)">
+          <span>{{item.viewValue}}</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+</main>

@@ -1,0 +1,45 @@
+<main class="date-select">
+  <div class="text-container">
+    asdasdasdasdsa
+  </div>
+  <section class="date-wrapper">
+    <owl-date-time class="datetime-picker"
+                   [styleClass]="'date-select-datetime-wrapper'"
+                   [locale]="zh">
+    </owl-date-time>
+    <div class="option-wrapper">
+      <section class="input-wrapper"
+               (click)="isPopupShow = true">
+        <span></span>
+        <em></em>
+      </section>
+      <section class="popup-wrapper"
+               *ngIf="isPopupShow"
+               (mouseleave)="closePopup($event)">
+        <ul class="select-wrapper">
+          <li *ngFor="let item of selectData"
+              (click)="selectOption(item)">
+            <span>{{item.viewValue}}</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <div class="option-wrapper">
+      <section class="input-wrapper"
+               (click)="isPopupShow = true">
+        <span></span>
+        <em></em>
+      </section>
+      <section class="popup-wrapper"
+               *ngIf="isPopupShow"
+               (mouseleave)="closePopup($event)">
+        <ul class="select-wrapper">
+          <li *ngFor="let item of selectData"
+              (click)="selectOption(item)">
+            <span>{{item.viewValue}}</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,221 @@
+  @import "../../../theme.scss";
+  .role-manage {
+    width: 1320px - 210px - 80px;
+    >header {
+      width: 100%;
+      font-size: 18px;
+      font-weight: bold;
+      color: #1c1c1c;
+      height: 18px;
+      line-height: 18px;
+      margin-bottom: 20px;
+      a {
+        float: right;
+        height: 100%;
+        display: flex;
+        text-align: center;
+        span {
+          width: 100px;
+          line-height: 30px;
+          cursor: pointer;
+          font-size: 14px;
+          height: 30px;
+          border-radius: 15px;
+          color: white;
+          display: block;
+          background-color: #ff6c60;
+          &:hover {
+            background-color: #f86c5f;
+          }
+          &:first-of-type {
+            background-color: $hoverColor;
+            &:hover {
+              background-color: $hoverColorDarker;
+            }
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  section.table-wrapper {
+    display: flex;
+    width: 100%;
+  }
+
+  .role-list {
+    width: 388px;
+    height: 800px;
+    box-sizing: border-box;
+    border: solid 1px #ebedf1;
+    li {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      &.header {
+        span {
+          font-weight: bold;
+        }
+      }
+      div {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        display: flex;
+        cursor: pointer;
+        &.active {
+          background-color: #ebedf1;
+        }
+      }
+      &.item:hover {
+        background-color: #ebedf1;
+      }
+      span {
+        font-size: 14px;
+        display: block;
+        color: #1c1c1c;
+        &:first-of-type {
+          width: 65px;
+          padding-left: 20px;
+          display: flex;
+          em {
+            align-self: center;
+            width: 12px;
+            height: 12px;
+            background-image: url(/assets/img/processing_chb.png);
+            background-position-x: -12px;
+            cursor: pointer;
+            line-height: 40px;
+            display: block;
+            &.active {
+              background-position-x: 0;
+            }
+          }
+        }
+        &:nth-child(2) {
+          width: 140px;
+          text-align: left;
+        }
+        &:last-of-type {
+          width: 388px - 2px - 140px;
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  .power-detail {
+    width: 643px;
+    height: 800px;
+    box-sizing: border-box;
+    border: solid 1px #ebedf1;
+    border-left: none;
+    li {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      display: flex;
+      box-sizing: border-box;
+      padding-left: 60px;
+      >span {
+        display: flex;
+        line-height: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+      >span:nth-child(1) {
+        width: 205px;
+      }
+      >span:nth-child(3) {
+        width: 150px;
+      }
+      &.header {
+        span {
+          font-weight: bold;
+        }
+        span:nth-child(2) {
+          width: 225px;
+        }
+      }
+      a {
+        width: 225px;
+        display: flex;
+        align-content: center;
+        justify-content: flex-start;
+        height: 40px;
+        div {
+          cursor: pointer;
+          width: 50px;
+          height: 100%;
+          display: flex;
+          justify-content: space-between;
+          font-size: 14px;
+          &:hover {
+            color: $hoverColor;
+          }
+          &:first-of-type {
+            margin-right: 40px;
+          }
+          em {
+            align-self: center;
+            width: 12px;
+            height: 12px;
+            background-image: url(/assets/img/processing_chb.png);
+            background-position-x: -12px;
+            cursor: pointer;
+            line-height: 40px;
+            display: block;
+            &.active {
+              background-position-x: 0;
+            }
+          }
+          span {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .user-info {
+    header {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      font-size: 14px;
+      font-weight: bold;
+      box-sizing: border-box;
+      padding-left: 60px;
+      a {
+        float: right;
+        width: 80px;
+        padding-right: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        cursor: pointer;
+        color: $hoverColor;
+        span {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        &:hover {
+          color: $hoverColorDarker;
+        }
+        em {
+          cursor: pointer;
+          ;
+          line-height: 40px;
+          float: left;
+          align-self: center;
+          width: 16px;
+          height: 10px;
+          background-image: url(/assets/img/processing_dropdown.png);
+          background-repeat: no-repeat;
+          background-position: 0 0;
+        }
+      }
+    }
+  }

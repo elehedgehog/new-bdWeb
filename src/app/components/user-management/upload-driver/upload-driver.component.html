@@ -1,0 +1,46 @@
+<main class="upload-driver">
+  <header class="header">
+    <h1>上传驱动</h1>
+    <span (click)="close()"></span>
+  </header>
+  <ul class="input-item-wrapper">
+    <li>
+      <span>上传驱动</span>
+      <input type="text"
+             disabled="disabled">
+      <input type="file"
+             (change)="fileChange($event)"
+             style="position: absolute; opacity: 0"
+             id="uploadDriver">
+      <em (click)="openFilePicker()">浏览...</em>
+    </li>
+    <li>
+      <span>驱动名称</span>
+      <input type="text">
+    </li>
+    <li>
+      <span>主版本</span>
+      <input type="text">
+    </li>
+    <li>
+      <span>次版本</span>
+      <input type="text">
+    </li>
+    <li>
+      <span>中文名称</span>
+      <input type="text">
+    </li>
+    <li>
+      <span>作者</span>
+      <input type="text">
+    </li>
+    <li style="height: 100px">
+      <span>描述</span>
+      <textarea cols="30"
+                rows="10"></textarea>
+    </li>
+  </ul>
+  <div class="btn-wrapper">
+    <span>确定</span>
+  </div>
+</main>

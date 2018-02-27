@@ -1,0 +1,85 @@
+<main class="collecting-detail-dialog">
+  <header class="header">
+    <h1>采集记录</h1>
+    <span (click)="close()"></span>
+  </header>
+  <section class="body-wrapper">
+    <ul class="body-header">
+      <li class="table-header-item">采集程序</li>
+      <li class="table-header-item">采集状态</li>
+      <li class="table-header-item">采集时间</li>
+      <li class="table-header-item">标签</li>
+      <li class="table-header-item">操作</li>
+    </ul>
+    <ul class="collecting-info-wrapper table-body-wrapper">
+      <li class="table-body-item">{{data.name}}</li>
+      <li class="table-body-item">{{data.statusText}}</li>
+      <li class="time-wrapper table-body-item">
+        <span>{{data.lastExecuteTime}}</span>
+        <!-- <span>-</span>
+          <span>123213</span> -->
+      </li>
+      <li class="labels-wrapper table-body-item"
+          style="justify-content: space-evenly; justify-content: space-evenly; padding: 10px">
+        <span *ngFor="let item of data.labels">{{item.label}}</span>
+      </li>
+      <li class="operate-btn table-body-item"
+          style="justify-content: space-evenly">
+        <span [matTooltip]="data.status === 'running' ? '暂停' : '开启'"
+              (click)="toggleStatus(data.status === 'running' ? 'pause' : 'running')"
+              [style.backgroundPositionX]="data.status === 'running' ? '0' : '-30px'"></span>
+        <span matTooltip="重启"
+              (click)="toggleStatus('restart')"></span>
+        <span matTooltip="停止"
+              (click)="toggleStatus('stop')"></span>
+      </li>
+    </ul>
+
+    <div class="collecting-detail-wrapper">
+      <section class="regional-box-wrapper">
+        <div class="upper-block">
+          <a>时间段</a>
+          <span *ngFor="let item of scaleBarData"
+                [style.background]="item.color"
+                (click)="selectScaleBarItem(item)"
+                [class.active]="item.selected"></span>
+        </div>
+        <div class="lower-block">
+          <div>
+            <span *ngFor="let item of detailData"
+                  (click)="selectDetailItem(item)"
+                  [class.active]="item.selected"
+                  [style.backgroundColor]="item.color"></span>
+          </div>
+          <ul>
+            <li *ngFor="let item of colorText">
+              <em [style.backgroundColor]="item.color"></em>
+              <span>{{item.text}}</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="detail-text-container"
+               *ngIf="detailItemSelected.getValue()">
+        <div class="detail-text-wrapper">
+          <span class="detail-text">采集时间:
+            <strong>{{getTimeText(detailItemSelected.getValue().time)}}</strong>
+          </span>
+          <span class="detail-text">采集状态:
+            <strong>{{getStatusText(detailItemSelected.getValue().status)}}</strong>
+          </span>
+          <span class="detail-text">采集统计: 读取报文
+            <strong>{{detailItemSelected.getValue().dataSourceNum}}</strong>个，生成数据
+            <strong>{{detailItemSelected.getValue().dataResultNum}}</strong>个
+          </span>
+          <span class="detail-text">错误日志
+            <strong></strong>
+          </span>
+        </div>
+        <ul class="detail-record-list-wrapper">
+          <li *ngFor="let item of detailItemSelected.getValue().errors">{{item.fileName + ': ' + item.message}}</li>
+        </ul>
+      </section>
+    </div>
+  </section>
+</main>

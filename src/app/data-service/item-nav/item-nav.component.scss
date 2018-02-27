@@ -1,0 +1,45 @@
+@import '../../theme.scss';
+.item-nav {
+  width: 100%;
+  cursor: pointer;
+}
+
+.self-wrapper {
+  width: 100%;
+  min-height: 30px;
+  box-sizing: border-box;
+  display: flex;
+  padding: 10px 0 10px 13px;
+  justify-content: flex-start;
+  cursor: pointer;
+  &:hover,
+  &.active {
+    background-color: $hoverColor;
+    span {
+      color: white;
+    }
+    em{
+      background-position-x: 0px;
+    }
+  }
+  em {
+    height: 7px;
+    width: 5px;
+    display: block;
+    background-image: url(/assets/img/service_triangle.png);
+    background-position: 5px 0;
+    margin-right: 10px;
+    margin-top: 3px;
+    transform-origin: center;
+    &.active {
+      background-position-x: 0px;
+    }
+  }
+  span {
+    display: block;
+    width: 245px;
+    font-size: 12px;
+    line-height: 12px;
+    min-height: 12px;
+  }
+}

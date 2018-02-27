@@ -1,0 +1,95 @@
+<main class="home-page">
+    <app-head-navigation></app-head-navigation>
+    <section class="home-page-content">
+        <section class="home-page-list cf">
+          <div class="list-collect">
+            <header class="global-title"><span>采集</span></header>
+            <ul class="list-collect-list scrollbar">
+              <!-- <li class="error">
+                <i class="collect-list-icon"></i>
+                <span class="collect-list-title">分片复制集</span>
+                <span class="collect-list-ip">10.148.83.4:27017</span>
+                <span class="collect-list-add">[+]</span>
+              </li> -->
+              <li *ngFor="let item of collectList" [ngClass]="{'error':item.status === 'error'}">
+                  <i class="collect-list-icon"></i>
+                  <span class="collect-list-title">{{ item.title }}</span>
+                  <span class="collect-list-ip">{{ item.ip }}</span>
+                  <span class="collect-list-add">[+]</span>
+              </li>
+            </ul>
+          </div>
+          <div class="list-storage">
+            <header class="global-title"><span>存储</span></header>
+            <ul class="list-collect-list scrollbar">
+                <li *ngFor="let item of collectList" [ngClass]="{'error':item.status === 'error'}">
+                    <i class="collect-list-icon"></i>
+                    <span class="collect-list-title">{{ item.title }}</span>
+                    <span class="collect-list-ip">{{ item.ip }}</span>
+                    <span class="collect-list-add">[+]</span>
+                </li>
+              </ul>
+            </div>
+          <div class="list-server">
+            <header class="global-title"><span>服务</span></header>
+            <ul class="list-collect-list scrollbar">
+                <li *ngFor="let item of collectList" [ngClass]="{'error':item.status === 'error'}">
+                    <i class="collect-list-icon"></i>
+                    <span class="collect-list-title">{{ item.title }}</span>
+                    <span class="collect-list-ip">{{ item.ip }}</span>
+                    <span class="collect-list-add">[+]</span>
+                </li>
+              </ul>
+            </div>
+        </section>
+        <section class="status-list cf">
+          <span class="status-list-icon">
+            <i></i>
+          </span>
+          <div class="status-list-content cf">
+            <ul class="list-content-title">
+              <li>状态</li>
+              <li>更新时间</li>
+              <li>服务器</li>
+              <li>失败原因</li>
+            </ul>
+            <ul class="list-content-msg scrollbar">
+              <li *ngFor="let item of statusList" [ngClass]="{'warn': item.icon === 'warn','error': item.icon === 'error' }">
+                <span>{{ item.status }}</span>
+                <span>{{ item.time }}</span>
+                <span>{{ item.server }}</span>
+                <span>{{ item.cause }}</span>
+              </li>
+            </ul>
+          </div>
+          <ul class="status-list-msg">
+            <li (click)="historyRecordPop=true">历史记录</li>
+            <li>确认</li>
+          </ul>
+        </section>
+    </section>
+    <section class="history-record" *ngIf="historyRecordPop">
+      <div class="history-record-inside">
+        <i class="close-icon" (click)="historyRecordPop = false"></i>
+        <header>历史记录</header>
+        <div class="history-record-border">
+          <ul class="history-record-title">
+            <li>状态</li>
+            <li>更新时间</li>
+            <li>服务器</li>
+            <li>失败原因</li>
+            <li>操作</li>
+          </ul>
+          <ul class="history-record-msg scrollbar">
+            <li *ngFor="let item of statusList" [ngClass]="{'warn': item.icon === 'warn','error': item.icon === 'error' }">
+              <span>{{ item.status }}</span>
+              <span>{{ item.time }}</span>
+              <span>{{ item.server }}</span>
+              <span>{{ item.cause }}</span>
+              <span><p>确认</p></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+</main>

@@ -1,0 +1,11 @@
+<main id="confirm">
+  <header class="header">
+    <span (click)="close()"></span>
+  </header>
+  <div class="content-wrapper">
+    <div class="title">
+      <em [style.backgroundPositionX]="data.type === 'success' ? '-44px' : data.type === 'error' ? '-22px' : '0px' "></em>
+      <span>{{data.tip}}</span>
+    </div>
+  </div>
+</main>
