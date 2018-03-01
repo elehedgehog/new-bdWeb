@@ -14,7 +14,8 @@ export class TaskMonitorService {
   private allRecordUrl = '/collect/monitor/task/multi/condition/history/page';
   private allInfo = '/collect/monitor/all/infos';
   private allInfoHistory = '/collect/monitor/task/history/all/classify/infos';
-
+  private serverInfos= `/collect/monitor/server/infos`
+  private applicationInfos= `/collect/monitor/application/infos`
   async getAllRecordData(pageIndex, pageSize, filter?: FilterCondition) {
     const params: any = {};
     params.currentPage = pageIndex;
@@ -131,7 +132,6 @@ export class TaskMonitorService {
     // const params = new HttpParams()
     //   .append('')
   }
-
   async getAllInfo(isHistory: boolean = false) {
     let res: { data: AllInfo } = null;
     try {
@@ -140,8 +140,29 @@ export class TaskMonitorService {
     } catch (err) {
       throw err;
     }
-
     return res.data;
+  }
+
+  
+  async getServerInfos() {   //获取所有采集程序的服务器信息接口
+    let res: { data: serverInfos[] } = null;
+    try {
+      res = <{ data: serverInfos[] }>(await this.http
+        .get(this.baseUrl + this.serverInfos).toPromise());
+    } catch (err) {
+      return null;
+    }
+    return res.data
+  }
+  async getApplicationInfos() {  //获取所有驱动信息接口
+    let res: { data: applicationInfos[] } = null;
+    try {
+      res = <{ data: applicationInfos[] }>(await this.http
+        .get(this.baseUrl + this.applicationInfos).toPromise());
+    } catch (err) {
+      return null;
+    }
+    return res.data
   }
 }
 

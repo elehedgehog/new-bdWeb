@@ -21,6 +21,9 @@ import { HeadNavigationComponent } from '../components/head-navigation/head-navi
 import {
   MultiLevelSelectComponent
 } from '../data-server/multi-level-select/multi-level-select.component';
+import { DataServiceService } from './data-service.service';
+import { ArgDistributeComponent } from './arg-distribute/arg-distribute.component';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @NgModule({
   imports: [
@@ -28,6 +31,7 @@ import {
     HttpClientModule,
     FormsModule,
     DateTimePickerModule,
+    NgxJsonViewerModule,
     RouterModule.forRoot([
       { path: 'dataService', component: DataServiceComponent }
     ])
@@ -41,7 +45,8 @@ import {
     GroupNavComponent,
     ItemNavComponent,
     HeadNavigationComponent,
-    MultiLevelSelectComponent
+    MultiLevelSelectComponent,
+    ArgDistributeComponent
   ],
   exports: [
     HeadNavigationComponent
@@ -54,6 +59,7 @@ import {
     DateSelectComponent,
     GroupNavComponent,
     ItemNavComponent
-  ]
+  ],
+  providers: [DataServiceService]
 })
 export class DataServiceModule { }

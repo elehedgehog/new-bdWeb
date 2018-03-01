@@ -5,6 +5,7 @@ import {
   ChangeDetectorRef, AfterContentChecked, Injector
 } from '@angular/core';
 import { ItemNavComponent } from '../item-nav/item-nav.component';
+import { DataServiceService } from '../data-service.service';
 
 @Component({
   selector: 'app-group-nav',
@@ -14,12 +15,12 @@ import { ItemNavComponent } from '../item-nav/item-nav.component';
     ItemNavComponent
   ]
 })
-export class GroupNavComponent implements AfterViewInit, AfterContentChecked {
+export class GroupNavComponent implements OnInit, AfterViewInit, AfterContentChecked {
 
   @ViewChild('chileContainer', { read: ViewContainerRef }) chileContainer: ViewContainerRef;
   @ViewChild('chileContainerForInsert', { read: ViewContainerRef })
   chileContainerForInsert: ViewContainerRef;
-  @Input() data: { type: 'group' | 'item', text: string, sub?: any[] };
+  @Input() data: { dirtype: 'group' | 'item', text: string, subs?: any[] };
   @Input() treeNodeIndex = 0;
 
   isInitData = false;
@@ -28,15 +29,17 @@ export class GroupNavComponent implements AfterViewInit, AfterContentChecked {
   constructor(
     private resolver: ComponentFactoryResolver,
     private cdRef: ChangeDetectorRef,
-    private injector: Injector
+    private injector: Injector,
+    public dataService: DataServiceService
   ) { }
 
+  ngOnInit() {
+  }
 
   ngAfterViewInit() {
   }
   ngAfterContentChecked() {
     if (!this.isInitData) {
-      console.log(this.treeNodeIndex);
       this.computeComponent();
       this.isInitData = true;
     }
@@ -46,9 +49,9 @@ export class GroupNavComponent implements AfterViewInit, AfterContentChecked {
     if (!this.data) {
       return;
     }
-    if (this.data.type === 'group') {
-      this.data.sub.forEach(item => {
-        if (item.type === 'item') {
+    if (this.data.dirtype === 'group') {
+      this.data.subs.forEach(item => {
+        if (item.dirtype === 'item') {
           const factoryItem = this.resolver.resolveComponentFactory(ItemNavComponent);
           const resolveInputsItem = ReflectiveInjector.resolve([
             { provide: 'data', useValue: this.data }
@@ -56,7 +59,7 @@ export class GroupNavComponent implements AfterViewInit, AfterContentChecked {
           const componentRefItem = factoryItem.create(ReflectiveInjector.fromResolvedProviders(
             resolveInputsItem, this.chileContainer.injector
           ));
-          componentRefItem.instance.data = this.data;
+          componentRefItem.instance.data = item;
           componentRefItem.instance.treeNodeIndex = this.treeNodeIndex + 1;
           this.chileContainerForInsert.insert(componentRefItem.hostView);
         } else {

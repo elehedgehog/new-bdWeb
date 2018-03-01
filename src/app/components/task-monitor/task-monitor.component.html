@@ -57,22 +57,22 @@
             <div class="progress-detail-wrapper"
                 *ngIf="subItem.isExpanded">
               <article>
-                <header>硬盘</header>
+                <header style="white-space: nowrap">硬盘</header>
                 <a>读取:
                   <strong>{{subItem.readSpeed
                     < 1024 ? subItem.readSpeed + 'KB/s' : (subItem.readSpeed / 1024).toFixed(2) + 'MB/s' }}</strong>
                 </a>
                 <a>写入:
-                  <strong>{{subItem.writeSpeed < 1024 ? subItem.writeSpeed + 'KB/s' : (subItem.writeSpeed / 1024).toFixed(2) + 'MB/s'}}</strong>
+                  <strong>{{subItem.writeSpeed < 1024 ? subItem.writeSpeed + 'KB/s' : (subItem.writeSpeed / 1024).toFixed(1) + 'MB/s'}}</strong>
                 </a>
               </article>
               <article>
                 <header>网络</header>
                 <a>上行:
-                  <strong>{{subItem.upload < 1024 ? subItem.upload + 'KB/s' : (subItem.upload / 1024).toFixed(2) + 'MB/s'}}</strong>
+                  <strong>{{subItem.upload < 1024 ? subItem.upload + 'KB/s' : (subItem.upload / 1024).toFixed(1) + 'MB/s'}}</strong>
                 </a>
                 <a>下行:
-                  <strong>{{subItem.download < 1024 ? subItem.download + 'KB/s' : (subItem.download / 1024).toFixed(2) + 'MB/s'}}</strong>
+                  <strong>{{subItem.download < 1024 ? subItem.download + 'KB/s' : (subItem.download / 1024).toFixed(1) + 'MB/s'}}</strong>
                 </a>
               </article>
             </div>
@@ -90,13 +90,13 @@
             <div class="result-text"
                 *ngIf="subItem.isExpanded">
               生成数据
-              <strong>{{subItem.totalResultNum}}</strong>
+              <strong>{{subItem.totalDataResultNum}}</strong>
               个
             </div>
             <div class="result-text"
                 *ngIf="subItem.isExpanded">
               生成数据
-              <strong>{{subItem.totalResultSize}}G</strong>
+              <strong>{{subItem.totalDataResultSize}}G</strong>
             </div>
           </li>
           <li class="table-detail-item edit">
@@ -119,84 +119,66 @@
                   (page)="pageChange($event)">
     </mat-paginator>
   </section>
-
-  <section class="new-task" *ngIf="newTaskPop">
-    <header class="header">
-      <h1>新建任务</h1>
-      <span (click)="newTaskPop=false"></span>
-    </header>
-    <ul class="new-task-step">
-      <li [ngClass]="{'on': step === 1}"><span>1</span></li>
-      <li [ngClass]="{'on': step === 2}"><span>2</span></li>
-      <li [ngClass]="{'on': step === 3}"><span>3</span></li>
-    </ul>
-    <div class="new-task-one" *ngIf="step === 1">
-      <p class="task-one-number">1、选择服务器</p>
-      <ul class="task-one-title cf">
-        <li>服务器</li>
-        <li>IP</li>
+  <section class="new-task-outside" *ngIf="newTaskPop">
+    <section class="new-task" >
+      <header class="header">
+        <h1>新建任务</h1>
+        <span (click)="newTaskPop=false"></span>
+      </header>
+      <ul class="new-task-step">
+        <li [ngClass]="{'on': step === 1}"><span>1</span></li>
+        <li [ngClass]="{'on': step === 2}"><span>2</span></li>
+        <li [ngClass]="{'on': step === 3}"><span>3</span></li>
       </ul>
-      <div class="ul-wrapper">
-        <ul class="task-one-content cf scrollbar">
-          <li>
-            <span>chxxj</span>
-            <span>[10.148.84.4:2192]</span>
-          </li>
-          <li>
-            <span>chxxj</span>
-            <span>[10.148.84.4:2192]</span>
-          </li>
-          <li>
-            <span>chxxj</span>
-            <span>[10.148.84.4:2192]</span>
-          </li>
-          <li>
-            <span>chxxj</span>
-            <span>[10.148.84.4:2192]</span>
-          </li>
-          <li>
-            <span>chxxj</span>
-            <span>[10.148.84.4:2192]</span>
-          </li>
-          <li>
-            <span>chxxj</span>
-            <span>[10.148.84.4:2192]</span>
-          </li>
-          <li>
-            <span>chxxj</span>
-            <span>[10.148.84.4:2192]</span>
+      <div class="new-task-one" *ngIf="step === 1">
+        <p class="task-one-number">1、选择服务器</p>
+        <ul class="task-one-title cf">
+          <li>服务器</li>
+          <li>IP</li>
+        </ul>
+        <div class="ul-wrapper">
+          <ul class="task-one-content cf scrollbar">
+            <li *ngFor="let item of serverInfos" 
+                (click)="toggleServerInfos(item)"
+                [ngClass]="{'on': serverSelected === item.csid}">
+              <span>{{ item.csid }}</span>
+              <span>{{ item.ip }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="new-task-two" *ngIf="step === 2">
+        <p class="task-two-number">2、选择采集驱动</p>
+        <ul class="task-two-title cf">
+          <li>驱动名称</li>
+          <li>主版本</li>
+          <li>次版本</li>
+          <li>中文名称</li>
+          <li>作者</li>
+          <li>描述</li>
+        </ul>
+        <ul class="task-two-content cf scrollbar">
+          <li *ngFor="let item of applicationInfos"
+              (click)="toggleApplicationServerInfos(item)"
+              [ngClass]="{'on': applicationSelected === item.egName}">
+            <span [title]="item.egName">{{ item.egName }}</span>
+            <span [title]="item.version">{{ item.version }}</span>
+            <span [title]="item.minVersion">{{ item.minVersion }}</span>
+            <span [title]="item.chName">{{ item.chName }}</span>
+            <span [title]="item.author">{{ item.author }}</span>
+            <span [title]="item.description">{{ item.description }}</span>
           </li>
         </ul>
       </div>
-    </div>
-    <div class="new-task-two" *ngIf="step === 2">
-      <p class="task-two-number">2、选择采集驱动</p>
-      <ul class="task-two-title cf">
-        <li>驱动名称</li>
-        <li>主版本</li>
-        <li>次版本</li>
-        <li>中文名称</li>
-        <li>作者</li>
-        <li>描述</li>
-      </ul>
-      <ul class="task-two-content cf scrollbar">
-        <li *ngFor="let item of driverList">
-          <span>{{ item.name }}</span>
-          <span>{{ item.versiono }}</span>
-          <span>{{ item.versiont }}</span>
-          <span>{{ item.cname }}</span>
-          <span>{{ item.author }}</span>
-          <span>{{ item.content }}</span>
-        </li>
-      </ul>
-    </div>
-    <div style="margin-bottom: 25px;" *ngIf="step === 3">
-      <app-collecting-edit-detail [data]="123" [isDialog]="false"></app-collecting-edit-detail>
-    </div>
-    <div class="new-task-btn">
-      <span class="new-task-forward" (click)="forwardStep()">上一步</span>
-      <span class="new-task-next" (click)="nextStep()" *ngIf="step === 1 || step === 2">下一步</span>
-      <span class="new-task-next" (click)="finishStep()"  *ngIf="step === 3">完成</span>
-    </div>
+      <div style="margin-bottom: 25px;" *ngIf="step === 3">
+        <app-collecting-edit-detail [data]="123" [isDialog]="false"></app-collecting-edit-detail>
+      </div>
+      <div class="new-task-btn">
+        <span class="new-task-forward" (click)="forwardStep()">上一步</span>
+        <span class="new-task-next" (click)="nextStep()" *ngIf="step === 1 || step === 2">下一步</span>
+        <span class="new-task-next" (click)="finishStep()"  *ngIf="step === 3">完成</span>
+      </div>
+    </section>
   </section>
+  
 </main>

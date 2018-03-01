@@ -31,20 +31,11 @@ export class TaskMonitorComponent implements OnInit, OnDestroy {
   filterCondition = new FilterCondition();
   allCollectingData: AllCollectingTaskForTable[] = [];
   allCollectingDataForRender: AllCollectingTaskForTable[] = [];
-  newTaskPop: boolean = true
-
-  driverList = [           //测试数据
-    { name:'asdf', versiono:'1.0', versiont:'1.0',cname: '大数据平台', author: '某某', content: '-'},
-    { name:'asdf', versiono:'1.0', versiont:'1.0',cname: '大数据平台', author: '某某', content: '-'},
-    { name:'asdf', versiono:'1.0', versiont:'1.0',cname: '大数据平台', author: '某某', content: '-'},
-    { name:'asdf', versiono:'1.0', versiont:'1.0',cname: '大数据平台', author: '某某', content: '-'},
-    { name:'asdf', versiono:'1.0', versiont:'1.0',cname: '大数据平台', author: '某某', content: '-'},
-    { name:'asdf', versiono:'1.0', versiont:'1.0',cname: '大数据平台', author: '某某', content: '-'},
-    { name:'asdf', versiono:'1.0', versiont:'1.0',cname: '大数据平台', author: '某某', content: '-'},
-    { name:'asdf', versiono:'1.0', versiont:'1.0',cname: '大数据平台', author: '某某', content: '-'},
-    { name:'asdf', versiono:'1.0', versiont:'1.0',cname: '大数据平台', author: '某某', content: '-'},
-    { name:'asdf', versiono:'1.0', versiont:'1.0',cname: '大数据平台', author: '某某', content: '-'}
-  ]
+  newTaskPop: boolean = false
+  serverInfos: any = []
+  applicationInfos: any = []
+  serverSelected: string = ''
+  applicationSelected: string = ''
   step: number = 1
 
   async ngOnInit() {
@@ -127,18 +118,39 @@ export class TaskMonitorComponent implements OnInit, OnDestroy {
     console.log(this.allCollectingDataForRender);
   }
 
-  toggleNewTask(){      //新建任务
+  async toggleNewTask() {      //新建任务
+    await this.getServerInfos()
+    await this.getApplicationInfos()
     this.newTaskPop = true
+
   }
-  forwardStep(){   //上一步
+  forwardStep() {   //上一步
     if (this.step !== 1)
       this.step--
   }
-  nextStep(){  //下一步
+  nextStep() {  //下一步
     if (this.step !== 3)
       this.step++
   }
-  finishStep(){
+  finishStep() {
     this.newTaskPop = false
+  }
+
+  async getServerInfos(){
+    const res = await this.taskMonitorService.getServerInfos();
+    if (!res)  return
+    this.serverInfos = res
+    console.log(this.serverInfos)
+  }
+  async getApplicationInfos(){
+    const res = await this.taskMonitorService.getApplicationInfos();
+    if (!res)  return
+    this.applicationInfos = res
+  }
+  toggleServerInfos(item){
+    this.serverSelected = item.csid === this.serverSelected ? '' : item.csid
+  }
+  toggleApplicationServerInfos(item) {
+    this.applicationSelected = item.egName === this.applicationSelected ? '' : item.egName
   }
 }

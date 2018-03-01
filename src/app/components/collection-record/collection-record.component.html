@@ -24,7 +24,7 @@
       <li class="table-body-item underline-text">{{item.ct.name}}</li>
       <li class="table-body-item">{{item.status}}</li>
       <li class="table-body-item">{{item.datetime}}</li>
-      <li class="table-body-item">{{item.delay}}分</li>
+      <li class="table-body-item">{{getDelayText(item.delay)}}</li>
       <li class="table-body-item static">
         <span>
           正常数据结果个数:
@@ -44,7 +44,7 @@
         </span>
       </li>
       <li class="table-body-item">
-        <a>25</a>
+        <a>{{item.retry}}</a>
       </li>
       <li class="table-body-item  operate">
         <em class="table-expander"

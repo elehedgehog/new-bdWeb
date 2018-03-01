@@ -1,6 +1,6 @@
 <main class="date-select">
   <div class="text-container">
-    asdasdasdasdsa
+    {{data.tip}}
   </div>
   <section class="date-wrapper">
     <owl-date-time class="datetime-picker"
@@ -9,16 +9,16 @@
     </owl-date-time>
     <div class="option-wrapper">
       <section class="input-wrapper"
-               (click)="isPopupShow = true">
-        <span></span>
+               (click)="isHourPopupShow = true">
+        <span>{{hourSelected}}</span>
         <em></em>
       </section>
       <section class="popup-wrapper"
-               *ngIf="isPopupShow"
+               *ngIf="isHourPopupShow"
                (mouseleave)="closePopup($event)">
         <ul class="select-wrapper">
-          <li *ngFor="let item of selectData"
-              (click)="selectOption(item)">
+          <li *ngFor="let item of hourSelectData"
+              (click)="selectOption(item, 'hour')">
             <span>{{item.viewValue}}</span>
           </li>
         </ul>
@@ -26,16 +26,16 @@
     </div>
     <div class="option-wrapper">
       <section class="input-wrapper"
-               (click)="isPopupShow = true">
-        <span></span>
+               (click)="isMinutePopupShow = true">
+        <span>{{minuteSelected}}</span>
         <em></em>
       </section>
       <section class="popup-wrapper"
-               *ngIf="isPopupShow"
+               *ngIf="isMinutePopupShow"
                (mouseleave)="closePopup($event)">
         <ul class="select-wrapper">
-          <li *ngFor="let item of selectData"
-              (click)="selectOption(item)">
+          <li *ngFor="let item of minuteSelectData"
+              (click)="selectOption(item, 'minute')">
             <span>{{item.viewValue}}</span>
           </li>
         </ul>

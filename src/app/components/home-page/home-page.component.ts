@@ -12,7 +12,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   constructor(
     public homePageService: HomePageService
   ) { }
-  historyRecordPop: boolean = true
+  historyRecordPop: boolean = false
   collectList: any = [
     {status: 'error',title: '分片复制集',ip: '10.148.83.4:27017'},
     {status: 'normal',title: '分片复制集',ip: '10.148.83.4:27017'},

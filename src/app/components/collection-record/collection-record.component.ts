@@ -42,10 +42,20 @@ export class CollectionRecordComponent implements OnInit {
     }
   }
 
+  getDelayText(time: string) {
+    if (Number(time) > (1000 * 60 * 60 * 60)) {
+      return (Number(time) / 1000 / 60 / 60 / 60).toFixed(0) + '时';
+    } else if (Number(time) > (1000 * 60 * 60)) {
+      return (Number(time) / 1000 / 60 / 60).toFixed(0) + '分';
+    } else {
+      return (Number(time) / 1000 / 60).toFixed(0) + '秒';
+    }
+  }
+
   async getAllRecordData(filter?: FilterCondition) {
     const res = await this.taskMonitorService.getAllRecordData(this.pageIndex + 1, this.pageSize,
       filter);
-      console.log(res);
+    console.log(res);
     if (!res) {
       return;
     }

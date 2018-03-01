@@ -8,9 +8,9 @@ import { Zh } from '../../class/zh';
 })
 export class CollectingEditDetailComponent implements OnInit {
   @Input()
-  public data: AllInfo__Task
-  @Input()  
-  isDialog: boolean
+  public data: AllInfo__Task;
+  @Input()
+  isDialog: boolean;
 
   constructor(
     // @Inject(forwardRef(()=>ParentComponent)) public data: AllInfo__Task
@@ -21,6 +21,6 @@ export class CollectingEditDetailComponent implements OnInit {
   isShowLabelPanel = false;
 
   ngOnInit() {
-    console.log(this.data)
+    console.log(this.data);
   }
 }

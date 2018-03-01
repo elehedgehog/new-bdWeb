@@ -15,6 +15,7 @@ export class SingleSelectComponent implements OnInit {
   constructor() { }
 
   isPopupShow = false;
+  data: any = null;
   isSelectAll = false;
 
   ngOnInit() {
@@ -33,6 +34,7 @@ export class SingleSelectComponent implements OnInit {
   selectOption(item: SelectData, isSelectAll?: boolean) {
     item.selected = !item.selected;
     this.isPopupShow = false;
+    this.data.inputValue = item.value;
   }
 
   closePopup($event) {

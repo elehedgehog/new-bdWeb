@@ -15,6 +15,7 @@ export class MultiSelectComponent implements OnInit {
   constructor() { }
 
   isPopupShow = false;
+  data: any = null;
   isSelectAll = false;
 
   ngOnInit() {
@@ -38,8 +39,14 @@ export class MultiSelectComponent implements OnInit {
       }
       return;
     }
-
     item.selected = !item.selected;
+    const selectedValue = [];
+    for (const select of this.selectData) {
+      if (select.selected) {
+        selectedValue.push(select.value);
+      }
+    }
+    this.data.inputValue = selectedValue;
   }
 
   closePopup($event) {

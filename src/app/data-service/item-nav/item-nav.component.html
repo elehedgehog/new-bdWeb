@@ -1,9 +1,9 @@
 <main class="item-nav">
   <div class="self-wrapper"
        [style.paddingLeft]="treeNodeIndex * 13 + 'px'"
-       (click)="isSelected = !isSelected"
-       [class.active]="isSelected">
+       (click)="selectItem()"
+       [class.active]="dataService.selectedItemKey === data.url">
     <em></em>
-    <span [style.width]="300 - (treeNodeIndex * 13 + 20 + 8) + 'px'">{{data.text}}</span>
+    <span [style.width]="300 - (treeNodeIndex * 13 + 20 + 8) + 'px'">{{data.cname}}</span>
   </div>
 </main>

@@ -22,7 +22,7 @@ export class CollectingEditComponent implements OnInit {
   isShowLabelPanel = false;
 
   ngOnInit() {
-    console.log(this.data)
+    console.log(this.data);
   }
 
   close() {

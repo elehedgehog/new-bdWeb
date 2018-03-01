@@ -1,7 +1,9 @@
 <main class="simple-input">
   <div class="text-container">
-    asdasdasdasdsa
+    {{data.tip}}
   </div>
   <input [type]="inputType"
+         (keyup)="valueChange()"
+         [placeholder]="data.props.isArray ? '以逗号隔开多个数据' : ''"
          [(ngModel)]="value">
 </main>

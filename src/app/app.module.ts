@@ -32,16 +32,11 @@ import {
 } from './components/collection-record/collection-record.component';
 import { HeadNavigationComponent } from './components/head-navigation/head-navigation.component';
 import { MaterialModule } from './src/app/module/material/material.module';
-import {
-  CollectingDetailDialogComponent
-} from './components/collecting-detail-dialog/collecting-detail-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { FilterSelectorComponent } from './components/filter-selector/filter-selector.component';
 import { DiverFilterPipe } from './pipe/diver-filter.pipe';
 import { MyPaginatorIntl } from './service/paginator.service';
 import { MatPaginatorIntl } from '@angular/material';
-import { CollectingEditComponent } from './components/collecting-edit/collecting-edit.component';
-import { CollectingEditDetailComponent } from './components/collecting-edit-detail/collecting-edit-detail.component';
 
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { DataStorageComponent } from './components/data-storage/data-storage.component';
@@ -76,6 +71,15 @@ import {
 import { DataServiceModule } from './data-service/data-service.module';
 import { DataServiceComponent } from './data-service/data-service/data-service.component';
 import { DialogModule } from './dialog/dialog.module';
+import {
+  CollectingEditComponent
+} from './components/collecting-edit/collecting-edit.component';
+import {
+  CollectingEditDetailComponent
+} from './components/collecting-edit-detail/collecting-edit-detail.component';
+import {
+  CollectingDetailDialogComponent
+} from './components/collecting-detail-dialog/collecting-detail-dialog.component';
 
 
 @NgModule({
@@ -90,11 +94,13 @@ import { DialogModule } from './dialog/dialog.module';
     ProcessingCollectionComponent,
     ProcessingStatisticsComponent,
     CollectionRecordComponent,
+    // CollectingEditDetailComponent,
+    // CollectingEditComponent,
     CollectingDetailDialogComponent,
+    CollectingEditComponent,
     CollectingEditDetailComponent,
     FilterSelectorComponent,
     DiverFilterPipe,
-    CollectingEditComponent,
     UserManagementComponent,
     DataStorageComponent,
     PowerManageComponent,

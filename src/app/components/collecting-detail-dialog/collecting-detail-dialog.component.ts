@@ -54,7 +54,6 @@ export class CollectingDetailDialogComponent implements OnInit {
   isFreshDataNeeded = false;
 
   async ngOnInit() {
-    console.log(this.data);
     await this.getProgressBarData();
     this.addScaleItemSelectedEvent();
   }
@@ -150,6 +149,7 @@ export class CollectingDetailDialogComponent implements OnInit {
       }));
     }
     this.scaleBarData = holder;
+    console.log(holder);
   }
 
   private async getProgressDetailData(page: string) {
@@ -158,7 +158,7 @@ export class CollectingDetailDialogComponent implements OnInit {
       .append('ctid', this.data.ctid.toString());
 
     const res: any = await this.http.get('http://10.148.83.221:10190/bigdata/collect'
-      + '/monitor/application/tasks/history/page', {
+      + '/monitor/application/tasks/history/page/info', {
         params
       }).toPromise();
 

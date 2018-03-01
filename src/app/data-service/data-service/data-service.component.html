@@ -4,40 +4,62 @@
     <header>数据服务</header>
     <div class="search-wrapper">
       <em></em>
-      <input placeholder="搜索" type="text">
+      <input placeholder="搜索"
+             (keyup)="search()"
+             [(ngModel)]="searchValue"
+             type="text">
     </div>
-    <app-group-nav *ngFor="let item of testNavData"
-                   [data]="item"></app-group-nav>
+    <div class="group-nav-wrapper">
+      <app-group-nav *ngFor="let item of dataService.serverDataForRender"
+                     [data]="item"></app-group-nav>
+    </div>
+    <!-- <span *ngFor="let item of serverData; let i = index">{{i}}</span> -->
   </section>
-  <section class="service-detail-wrapper">
+  <section class="service-detail-wrapper"
+           [hidden]="dataService.selectedItemKey.length === 0">
     <div class="des-wrapper">
       <header>接口信息</header>
       <ul>
-        <li>说明: XXXXXXXXXXXXXXXXXXX</li>
-        <li>样例：12312321321</li>
+        <li>样例：{{dataService.des}}</li>
+        <li>说明: {{dataService.selectedItemKey}}</li>
       </ul>
     </div>
     <div class="args-wrapper">
       <header>接口参数</header>
-      <app-single-select></app-single-select>
-      <app-single-select></app-single-select>
-      <app-single-select></app-single-select>
-      <app-multi-select></app-multi-select>
-      <span class="btn">确定</span>
+      <app-arg-distribute *ngFor="let item of dataService.argsData"
+                          [data]="item"></app-arg-distribute>
+      <span class="btn" (click)="submit()">确定</span>
     </div>
   </section>
-  <section class="request-wrapper"
-           [hidden]="true">
-    <div class="toggler-wrapper">
-      <span></span>
+  <section [style.width]="requlstBodyExpanded ? requestWindowExpandedWidth + 'px' : '300px'"
+           class="request-wrapper"
+           [hidden]="false">
+    <div class="toggler-wrapper"
+         [class.expanded]="requlstBodyExpanded">
+      <span [class.expanded]="requlstBodyExpanded"
+            (click)="requlstBodyExpanded = !requlstBodyExpanded"></span>
     </div>
-    <div class="option-body">
-      <a class="option-wrapper">
-        <span></span>
-        <input type="text">
-        <em></em>
+    <div class="option-body"
+         [class.expanded]="requlstBodyExpanded">
+      <a class="option-wrapper"
+         [class.expanded]="requlstBodyExpanded">
+        <span [class.expanded]="requlstBodyExpanded">请求链接</span>
+        <input type="text"
+               [class.expanded]="requlstBodyExpanded">
+        <em [class.expanded]="requlstBodyExpanded"
+            (click)="submit()">确定</em>
       </a>
-      <a class="result-wrapper"></a>
+      <a class="result-wrapper"
+         [class.expanded]="requlstBodyExpanded">
+        <!-- <header>
+           <div>JSON</div>
+           <div>Text</div>
+           <span></span>
+         </header> -->
+        <div>
+          <ngx-json-viewer [json]="jsonData"></ngx-json-viewer>
+        </div>
+      </a>
     </div>
     <div class="request-history-wrapper">
     </div>

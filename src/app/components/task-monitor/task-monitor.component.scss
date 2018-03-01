@@ -289,7 +289,7 @@
   }
   .processing-add{
     position: absolute;
-    bottom: 0;
+    top: 0;
     right: -60px;
     width: 39px;
     height: 40px;
@@ -306,6 +306,17 @@
 
   }
   .outline-border{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 3;
+  }
+  .new-task-outside{
     position: absolute;
     left: 0;
     top: 0;
@@ -455,7 +466,7 @@
         &.on{
           background-color: #2A659E;
           span{
-            color: #fff;
+            color: #fff!important;
           }
         }
         &:hover{
@@ -486,12 +497,16 @@
       float: left;
       text-align: center;
       display: inline-block;
-      &:nth-child(1){ width: 16%; }
-      &:nth-child(2){ width: 15%; }
-      &:nth-child(3){ width: 15%; }
-      &:nth-child(4){ width: 18%; }
-      &:nth-child(5){ width: 16%; }
-      &:nth-child(6){ width: 20%; }
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; 
+      padding: 0 10px;
+      &:nth-child(1){ width: calc(16% - 20px);}
+      &:nth-child(2){ width: calc(15% - 20px); }
+      &:nth-child(3){ width: calc(15% - 20px); }
+      &:nth-child(4){ width: calc(18% - 20px); }
+      &:nth-child(5){ width: calc(16% - 20px); }
+      &:nth-child(6){ width: calc(20% - 20px); }
     }
    
     

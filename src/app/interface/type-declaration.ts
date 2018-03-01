@@ -189,3 +189,18 @@ interface storageIndexDetail {
     values: string[]
   }]
 }
+interface serverInfos {
+  ip: string
+  description: string
+  port:number
+  csid: string
+}
+interface applicationInfos {
+  egName: string
+  chName: string
+  description: string
+  cts: string[]
+  version: string
+  author: string
+  minVersion: string
+}

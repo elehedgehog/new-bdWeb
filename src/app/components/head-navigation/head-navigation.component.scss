@@ -57,12 +57,18 @@ section {
       margin-right: 70px;
       position: relative;
       cursor: pointer;
+      span{
+        display: none;
+      }
       &:focus {
         outline: none !important;
       }
       &:hover{
         .second-tier{
           display: block;
+        }
+        span{
+          display: inline-block;
         }
       }
       a {
@@ -75,7 +81,6 @@ section {
       }
       span {
         background-color: $hoverColor;
-        display: block;
         position: absolute;
         height: 3px;
         width: 100%;

@@ -94,6 +94,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  align-content: center;
   flex-direction: row;
   font-size: 12px;
   max-height: 110px;
@@ -120,6 +121,7 @@
       background-image: url(/assets/img/processing_dropdown.png);
       background-repeat: no-repeat;
       background-position: 0 0;
+      margin-left: 0;
     }
   }
 }
